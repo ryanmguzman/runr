@@ -3,1056 +3,971 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rünr — Campus Delivery, Actually Affordable</title>
+<title>Pronto — Campus Delivery for UNC</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 
-/* ─────────────────────────────────────────────
-   TOKENS
-───────────────────────────────────────────── */
 :root {
-  --bg:        #0F0F10;
-  --bg-1:      #141416;
-  --bg-2:      #1A1A1D;
-  --border:    rgba(255,255,255,0.07);
-  --border-2:  rgba(255,255,255,0.12);
-  --lime:      #C8FF47;
-  --lime-dim:  rgba(200,255,71,0.12);
-  --lime-glow: rgba(200,255,71,0.25);
-  --white:     #FFFFFF;
-  --t1:        #F4F4F5;
-  --t2:        #A1A1AA;
-  --t3:        #52525B;
-  --red:       #FF5757;
-  --teal:      #34EAC5;
-  --r:         14px;
-  --r-sm:      8px;
+  --bg:       #FAFAFA;
+  --bg-1:     #FFFFFF;
+  --bg-2:     #F5F5F7;
+  --bg-3:     #EBEBED;
+  --border:   rgba(0,0,0,0.08);
+  --border-2: rgba(0,0,0,0.14);
+  --ink:      #1D1D1F;
+  --ink-2:    #6E6E73;
+  --ink-3:    #AEAEB2;
+  --accent:   #1D1D1F;
+  --blue:     #2563FF;
+  --blue-lt:  rgba(37,99,255,0.09);
+  --green:    #1A8917;
+  --red:      #FF3B30;
+  --r:        16px;
+  --r-sm:     10px;
+  --r-xs:     6px;
+  --shadow:   0 2px 12px rgba(0,0,0,0.06), 0 1px 3px rgba(0,0,0,0.04);
+  --shadow-lg:0 12px 40px rgba(0,0,0,0.1), 0 4px 12px rgba(0,0,0,0.06);
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; font-size: 16px; }
-
+html { scroll-behavior: smooth; }
 body {
   background: var(--bg);
-  color: var(--t1);
-  font-family: 'Outfit', sans-serif;
-  overflow-x: hidden;
+  color: var(--ink);
+  font-family: 'Inter', -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 
-/* ─────────────────────────────────────────────
-   NAV
-───────────────────────────────────────────── */
+/* ── NAV ── */
 nav {
   position: fixed;
   top: 0; left: 0; right: 0;
   z-index: 900;
-  height: 60px;
-  padding: 0 2rem;
+  height: 52px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: rgba(15,15,16,0.8);
-  backdrop-filter: blur(20px) saturate(180%);
+  padding: 0 2rem;
+  background: rgba(250,250,250,0.85);
+  backdrop-filter: blur(24px) saturate(200%);
+  -webkit-backdrop-filter: blur(24px) saturate(200%);
   border-bottom: 1px solid var(--border);
 }
 
 .logo {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-weight: 800;
-  font-size: 1.35rem;
+  font-size: 1.1rem;
+  font-weight: 700;
   letter-spacing: -0.03em;
-  color: var(--white);
+  color: var(--ink);
   text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+}
+.nav-links a {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--ink-2);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.nav-links a:hover { color: var(--ink); }
+
+.nav-right {
   display: flex;
   align-items: center;
-  gap: 0.1rem;
+  gap: 1rem;
 }
-.logo-dot { color: var(--lime); }
 
-.nav-center {
-  display: flex;
-  gap: 0.25rem;
-  background: var(--bg-2);
-  border: 1px solid var(--border);
-  border-radius: 100px;
-  padding: 0.3rem;
-}
-.nav-center a {
-  font-size: 0.825rem;
-  font-weight: 500;
-  color: var(--t2);
-  text-decoration: none;
-  padding: 0.35rem 0.9rem;
-  border-radius: 100px;
-  transition: all 0.18s;
-}
-.nav-center a:hover { color: var(--t1); background: var(--bg-1); }
-
-.nav-right { display: flex; align-items: center; gap: 1rem; }
-
-.status-chip {
+.status-tag {
   display: flex;
   align-items: center;
-  gap: 0.4rem;
-  padding: 0.3rem 0.75rem;
-  border-radius: 100px;
-  border: 1px solid var(--border);
-  font-size: 0.75rem;
+  gap: 0.35rem;
+  font-size: 0.72rem;
   font-weight: 500;
-  color: var(--t3);
+  color: var(--ink-3);
 }
-.s-dot {
+.sdot {
   width: 6px; height: 6px;
   border-radius: 50%;
-  background: var(--t3);
+  background: var(--ink-3);
   flex-shrink: 0;
 }
-.s-dot.open  { background: var(--lime); box-shadow: 0 0 8px var(--lime-glow); animation: pulse 2s ease infinite; }
-.s-dot.closed { background: var(--red); }
-@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.6;transform:scale(0.8)} }
+.sdot.open  { background: var(--green); animation: blink 2s ease infinite; }
+.sdot.closed{ background: var(--red); }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.4} }
 
-.btn-nav {
-  font-family: 'Outfit', sans-serif;
-  font-size: 0.85rem;
+.btn-cta {
+  font-size: 0.82rem;
   font-weight: 600;
-  color: var(--bg);
-  background: var(--lime);
+  color: #fff;
+  background: #2563FF;
   border: none;
-  padding: 0.5rem 1.25rem;
+  padding: 0.45rem 1.1rem;
   border-radius: 100px;
   cursor: pointer;
   text-decoration: none;
-  transition: all 0.18s;
   display: inline-block;
+  transition: all 0.18s;
+  letter-spacing: -0.01em;
 }
-.btn-nav:hover { background: #d4ff5c; transform: translateY(-1px); }
+.btn-cta:hover { background: #1d52e8; transform: translateY(-1px); }
 
-@media (max-width: 768px) {
-  .nav-center { display: none; }
+@media (max-width: 700px) {
+  .nav-links { display: none; }
   nav { padding: 0 1.25rem; }
 }
 
-/* ─────────────────────────────────────────────
-   HERO
-───────────────────────────────────────────── */
+/* ── HERO ── */
 .hero {
   min-height: 100svh;
-  padding-top: 60px;
+  padding-top: 52px;
   display: flex;
   flex-direction: column;
+  background: var(--bg-1);
   position: relative;
   overflow: hidden;
 }
 
-/* subtle radial gradient background */
-.hero-bg {
+.hero-bg-blur {
   position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse 60% 50% at 70% 30%, rgba(200,255,71,0.06) 0%, transparent 60%),
-    radial-gradient(ellipse 40% 60% at 20% 80%, rgba(52,234,197,0.04) 0%, transparent 50%);
-  pointer-events: none;
-}
-
-/* floating card effect */
-.hero-blob {
-  position: absolute;
-  width: 500px; height: 500px;
+  width: 800px; height: 800px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(200,255,71,0.07) 0%, transparent 70%);
-  top: 5%; right: -100px;
-  animation: float 8s ease-in-out infinite alternate;
+  background: radial-gradient(circle, rgba(37,99,255,0.07) 0%, transparent 65%);
+  top: -200px; right: -200px;
   pointer-events: none;
 }
-@keyframes float { from { transform: translateY(0) scale(1); } to { transform: translateY(-30px) scale(1.05); } }
 
 .hero-content {
   flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  max-width: 1120px;
-  margin: 0 auto;
+  align-items: center;
+  text-align: center;
   padding: 5rem 2rem 3rem;
+  max-width: 900px;
+  margin: 0 auto;
   width: 100%;
   position: relative;
   z-index: 2;
 }
 
-.hero-badge {
+.hero-label {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.4rem 1rem 0.4rem 0.5rem;
+  padding: 0.3rem 0.85rem;
   background: var(--bg-2);
-  border: 1px solid var(--border-2);
+  border: 1px solid var(--border);
   border-radius: 100px;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   font-weight: 500;
-  color: var(--t2);
+  color: var(--ink-2);
   margin-bottom: 2rem;
-  width: fit-content;
-  animation: slideDown 0.6s cubic-bezier(.22,1,.36,1) both;
+  animation: fadeUp 0.5s ease both;
 }
-.badge-pill {
-  background: var(--lime);
-  color: var(--bg);
-  font-size: 0.68rem;
-  font-weight: 700;
-  padding: 0.15rem 0.55rem;
-  border-radius: 100px;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+.label-dot {
+  width: 5px; height: 5px;
+  background: var(--blue);
+  border-radius: 50%;
 }
 
 .hero-h1 {
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: clamp(3rem, 8vw, 6.5rem);
   font-weight: 800;
-  font-size: clamp(3.2rem, 8vw, 7rem);
+  letter-spacing: -0.04em;
   line-height: 1.0;
-  letter-spacing: -0.03em;
-  color: var(--white);
-  margin-bottom: 1.75rem;
-  animation: slideDown 0.6s cubic-bezier(.22,1,.36,1) 0.08s both;
+  color: var(--ink);
+  margin-bottom: 1.5rem;
+  animation: fadeUp 0.5s ease 0.07s both;
 }
-.hero-h1 .accent { color: var(--lime); }
-.hero-h1 .dim { color: var(--t3); }
+.hero-h1 .muted { color: var(--ink-3); font-weight: 300; }
 
-.hero-sub {
-  font-size: clamp(1rem, 2vw, 1.2rem);
-  font-weight: 300;
-  color: var(--t2);
-  max-width: 500px;
+.hero-p {
+  font-size: clamp(0.95rem, 2vw, 1.15rem);
+  font-weight: 400;
+  color: var(--ink-2);
   line-height: 1.65;
-  margin-bottom: 2.5rem;
-  animation: slideDown 0.6s cubic-bezier(.22,1,.36,1) 0.14s both;
+  max-width: 500px;
+  margin-bottom: 2.25rem;
+  animation: fadeUp 0.5s ease 0.12s both;
 }
 
-.hero-ctas {
+.hero-btns {
   display: flex;
   gap: 0.75rem;
+  justify-content: center;
   flex-wrap: wrap;
-  animation: slideDown 0.6s cubic-bezier(.22,1,.36,1) 0.2s both;
+  animation: fadeUp 0.5s ease 0.17s both;
 }
 
 .btn-primary {
-  font-family: 'Outfit', sans-serif;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: 600;
-  color: var(--bg);
-  background: var(--lime);
+  color: #fff;
+  background: #2563FF;
   border: none;
-  padding: 0.85rem 2rem;
+  padding: 0.8rem 1.75rem;
   border-radius: 100px;
   cursor: pointer;
   text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  transition: all 0.2s;
+  display: inline-block;
+  transition: all 0.18s;
+  letter-spacing: -0.01em;
 }
-.btn-primary:hover { background: #d4ff5c; transform: translateY(-2px); box-shadow: 0 12px 32px rgba(200,255,71,0.25); }
+.btn-primary:hover { background: #1d52e8; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(37,99,255,0.35); }
 
-.btn-ghost {
-  font-family: 'Outfit', sans-serif;
-  font-size: 0.95rem;
+.btn-secondary {
+  font-size: 0.9rem;
   font-weight: 500;
-  color: var(--t1);
+  color: var(--ink);
   background: transparent;
   border: 1px solid var(--border-2);
-  padding: 0.85rem 2rem;
+  padding: 0.8rem 1.75rem;
   border-radius: 100px;
   cursor: pointer;
   text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  transition: all 0.2s;
+  display: inline-block;
+  transition: all 0.18s;
 }
-.btn-ghost:hover { border-color: var(--t2); background: rgba(255,255,255,0.04); }
+.btn-secondary:hover { background: var(--bg-2); }
 
-/* hero metrics strip */
+/* metrics */
 .hero-metrics {
-  border-top: 1px solid var(--border);
+  width: 100%;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4,1fr);
+  border-top: 1px solid var(--border);
+  background: var(--bg-1);
   position: relative;
   z-index: 2;
-  animation: fadeUp 0.7s ease 0.35s both;
 }
-.metric {
-  padding: 1.75rem 2rem;
+.hm {
+  padding: 1.5rem 2rem;
   border-right: 1px solid var(--border);
+  text-align: center;
 }
-.metric:last-child { border-right: none; }
-.metric-val {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-weight: 800;
-  font-size: 2rem;
-  color: var(--white);
-  letter-spacing: -0.02em;
-  line-height: 1;
-  margin-bottom: 0.3rem;
+.hm:last-child { border-right: none; }
+.hm-val {
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  margin-bottom: 0.2rem;
 }
-.metric-val.lime { color: var(--lime); }
-.metric-label {
-  font-size: 0.8rem;
+.hm-label {
+  font-size: 0.75rem;
   font-weight: 400;
-  color: var(--t3);
+  color: var(--ink-3);
 }
-
-@media (max-width: 640px) {
+@media (max-width: 600px) {
   .hero-metrics { grid-template-columns: 1fr 1fr; }
-  .metric:nth-child(2) { border-right: none; }
-  .metric:nth-child(1), .metric:nth-child(2) { border-bottom: 1px solid var(--border); }
+  .hm:nth-child(2) { border-right: none; }
+  .hm:nth-child(1), .hm:nth-child(2) { border-bottom: 1px solid var(--border); }
 }
 
-/* ─────────────────────────────────────────────
-   SCROLL TICKER
-───────────────────────────────────────────── */
+/* ── TICKER ── */
 .ticker {
+  background: #2563FF;
+  height: 34px;
   overflow: hidden;
-  background: var(--lime);
-  height: 36px;
   display: flex;
   align-items: center;
 }
 .ticker-track {
   display: flex;
   white-space: nowrap;
-  animation: scroll-left 20s linear infinite;
+  animation: scroll-ticker 24s linear infinite;
 }
-.ticker-item {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 0.72rem;
-  font-weight: 700;
-  text-transform: uppercase;
+.t-item {
+  font-size: 0.7rem;
+  font-weight: 600;
   letter-spacing: 0.1em;
-  color: var(--bg);
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
   padding: 0 2.5rem;
   display: flex;
   align-items: center;
   gap: 2.5rem;
 }
-.ticker-item::after {
-  content: '·';
-  opacity: 0.4;
-}
-@keyframes scroll-left {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
-}
+.t-item::after { content: '·'; opacity: 0.4; }
+@keyframes scroll-ticker { from{transform:translateX(0)} to{transform:translateX(-50%)} }
 
-/* ─────────────────────────────────────────────
-   SHARED SECTION STYLES
-───────────────────────────────────────────── */
+/* ── SECTIONS ── */
 .section { padding: 6rem 2rem; }
-.section-inner { max-width: 1120px; margin: 0 auto; }
+.section-inner { max-width: 1040px; margin: 0 auto; }
 
-.eyebrow {
-  font-size: 0.75rem;
+.s-eyebrow {
+  font-size: 0.72rem;
   font-weight: 600;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--lime);
-  margin-bottom: 0.75rem;
+  color: var(--ink-3);
+  margin-bottom: 0.6rem;
 }
 
-.section-h2 {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-weight: 800;
-  font-size: clamp(2rem, 4vw, 3.25rem);
-  letter-spacing: -0.025em;
+.s-h2 {
+  font-size: clamp(1.9rem, 4vw, 3rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
   line-height: 1.1;
-  color: var(--white);
-  margin-bottom: 1rem;
+  color: var(--ink);
+  margin-bottom: 0.85rem;
 }
 
-.section-p {
+.s-p {
   font-size: 1rem;
-  font-weight: 300;
-  color: var(--t2);
-  max-width: 460px;
-  line-height: 1.7;
+  font-weight: 400;
+  color: var(--ink-2);
+  line-height: 1.65;
+  max-width: 440px;
 }
 
-/* ─────────────────────────────────────────────
-   HOW IT WORKS
-───────────────────────────────────────────── */
-.how-section { background: var(--bg-1); }
+/* ── HOW ── */
+.how-section { background: var(--bg-2); }
 
-.how-header {
+.how-top {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
   flex-wrap: wrap;
   gap: 2rem;
-  margin-bottom: 3rem;
+  margin-bottom: 2.5rem;
 }
 
-.steps-grid {
+.steps {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 1px;
   background: var(--border);
-  border: 1px solid var(--border);
   border-radius: var(--r);
   overflow: hidden;
+  box-shadow: var(--shadow);
 }
-
-.step-card {
+.step {
   background: var(--bg-1);
   padding: 2rem 1.75rem;
-  transition: background 0.2s;
-  position: relative;
+  transition: background 0.15s;
 }
-.step-card:hover { background: var(--bg-2); }
+.step:hover { background: #FEFEFE; }
 
-.step-number {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-weight: 800;
-  font-size: 0.75rem;
-  color: var(--lime);
-  letter-spacing: 0.1em;
-  margin-bottom: 1.25rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-.step-number::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background: var(--border-2);
-}
-
-.step-title {
-  font-family: 'Plus Jakarta Sans', sans-serif;
+.step-n {
+  font-size: 0.68rem;
   font-weight: 700;
-  font-size: 1.05rem;
-  color: var(--white);
-  margin-bottom: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: 1rem;
+}
+.step-title {
+  font-size: 0.975rem;
+  font-weight: 600;
   letter-spacing: -0.01em;
+  color: var(--ink);
+  margin-bottom: 0.5rem;
 }
-
 .step-desc {
-  font-size: 0.875rem;
-  font-weight: 300;
-  color: var(--t2);
-  line-height: 1.65;
+  font-size: 0.845rem;
+  font-weight: 400;
+  color: var(--ink-2);
+  line-height: 1.6;
 }
+@media (max-width: 860px) { .steps { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 480px) { .steps { grid-template-columns: 1fr; } }
 
-@media (max-width: 900px) { .steps-grid { grid-template-columns: 1fr 1fr; } }
-@media (max-width: 500px) { .steps-grid { grid-template-columns: 1fr; } }
-
-/* group callout */
-.group-callout {
-  margin-top: 1.5rem;
-  padding: 1.5rem 1.75rem;
-  border-radius: var(--r);
-  background: var(--lime-dim);
-  border: 1px solid rgba(200,255,71,0.2);
+.info-strip {
+  margin-top: 1.25rem;
+  padding: 1.25rem 1.5rem;
+  background: var(--blue-lt);
+  border-radius: var(--r-sm);
+  border: 1px solid rgba(37,99,255,0.16);
   display: flex;
-  gap: 1.25rem;
+  gap: 1rem;
   align-items: flex-start;
 }
-.callout-label {
-  font-size: 0.72rem;
+.strip-tag {
+  font-size: 0.68rem;
   font-weight: 700;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--lime);
+  color: var(--blue);
   white-space: nowrap;
-  padding-top: 0.15rem;
+  padding-top: 0.1rem;
 }
-.callout-text {
-  font-size: 0.9rem;
-  font-weight: 300;
-  color: var(--t1);
-  line-height: 1.65;
+.strip-text {
+  font-size: 0.865rem;
+  font-weight: 400;
+  color: var(--ink-2);
+  line-height: 1.6;
 }
 
-/* ─────────────────────────────────────────────
-   PRICING
-───────────────────────────────────────────── */
-.pricing-section { background: var(--bg); }
+/* ── PRICING ── */
+.pricing-section { background: var(--bg-1); }
 
-.pricing-grid {
+.price-cards {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
-  margin-top: 3rem;
+  margin-top: 2.5rem;
 }
-@media (max-width: 800px) { .pricing-grid { grid-template-columns: 1fr; } }
+@media (max-width: 760px) { .price-cards { grid-template-columns: 1fr; } }
 
-.price-card {
-  background: var(--bg-1);
+.pc {
+  background: var(--bg-2);
   border: 1px solid var(--border);
   border-radius: var(--r);
-  padding: 2rem;
+  padding: 1.75rem;
   position: relative;
-  transition: border-color 0.2s, transform 0.2s;
+  transition: all 0.2s;
 }
-.price-card:hover { border-color: var(--border-2); transform: translateY(-3px); }
-
-.price-card.featured {
-  border-color: rgba(200,255,71,0.35);
-  background: linear-gradient(160deg, rgba(200,255,71,0.05) 0%, var(--bg-1) 60%);
+.pc:hover { box-shadow: var(--shadow-lg); transform: translateY(-2px); }
+.pc.featured {
+  background: #2563FF;
+  border-color: transparent;
 }
-.price-card.featured:hover { border-color: rgba(200,255,71,0.6); }
+.pc.featured:hover { box-shadow: 0 16px 48px rgba(37,99,255,0.35); }
 
-.featured-label {
+.pc-tag {
   position: absolute;
-  top: -11px;
-  left: 1.75rem;
-  font-size: 0.68rem;
+  top: -10px; left: 1.5rem;
+  font-size: 0.65rem;
   font-weight: 700;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--bg);
-  background: var(--lime);
-  padding: 0.2rem 0.7rem;
+  background: var(--blue);
+  color: #fff;
+  padding: 0.2rem 0.65rem;
   border-radius: 100px;
 }
-
-.price-type {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-weight: 700;
-  font-size: 1.05rem;
-  color: var(--white);
-  margin-bottom: 0.25rem;
+.pc-type {
+  font-size: 0.975rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin-bottom: 0.2rem;
 }
-.price-sub {
-  font-size: 0.8rem;
-  font-weight: 400;
-  color: var(--t3);
-  margin-bottom: 1.75rem;
-}
-.price-amount {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-weight: 800;
-  font-size: 3rem;
-  color: var(--lime);
-  letter-spacing: -0.03em;
-  line-height: 1;
-  margin-bottom: 0.25rem;
-}
-.price-unit {
+.pc.featured .pc-type { color: #fff; }
+.pc-sub {
   font-size: 0.78rem;
   font-weight: 400;
-  color: var(--t3);
+  color: var(--ink-3);
   margin-bottom: 1.5rem;
 }
-.price-list {
+.pc.featured .pc-sub { color: rgba(255,255,255,0.5); }
+.pc-price {
+  font-size: 3rem;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  color: var(--ink);
+  line-height: 1;
+  margin-bottom: 0.2rem;
+}
+.pc.featured .pc-price { color: #fff; }
+.pc-unit {
+  font-size: 0.78rem;
+  font-weight: 400;
+  color: var(--ink-3);
+  margin-bottom: 1.5rem;
+}
+.pc.featured .pc-unit { color: rgba(255,255,255,0.45); }
+.pc-list {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 0.55rem;
+  gap: 0.5rem;
 }
-.price-list li {
-  font-size: 0.875rem;
-  font-weight: 300;
-  color: var(--t2);
+.pc-list li {
+  font-size: 0.845rem;
+  font-weight: 400;
+  color: var(--ink-2);
   display: flex;
-  align-items: flex-start;
   gap: 0.6rem;
+  align-items: flex-start;
   line-height: 1.45;
 }
-.price-list li::before {
+.pc.featured .pc-list li { color: rgba(255,255,255,0.65); }
+.pc-list li::before {
   content: '';
-  display: block;
-  width: 5px;
-  height: 5px;
-  background: var(--lime);
+  width: 4px; height: 4px;
+  background: var(--ink-3);
   border-radius: 50%;
   flex-shrink: 0;
-  margin-top: 0.45rem;
+  margin-top: 0.5rem;
 }
+.pc.featured .pc-list li::before { background: rgba(255,255,255,0.3); }
 
-/* compare strip */
-.compare-strip {
-  margin-top: 2rem;
-  border-radius: var(--r);
+/* compare */
+.compare {
+  margin-top: 1.75rem;
+  border-radius: var(--r-sm);
   overflow: hidden;
   border: 1px solid var(--border);
+  box-shadow: var(--shadow);
 }
-.compare-head {
+.compare-hd {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr;
-  padding: 0.85rem 1.5rem;
+  padding: 0.8rem 1.25rem;
   background: var(--bg-2);
   border-bottom: 1px solid var(--border);
 }
-.compare-head span {
-  font-size: 0.72rem;
+.compare-hd span {
+  font-size: 0.68rem;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--t3);
+  letter-spacing: 0.06em;
+  color: var(--ink-3);
 }
-.compare-head .h-us { color: var(--lime); }
-
-.compare-row {
+.compare-hd .us { color: var(--ink); }
+.compare-r {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr;
-  padding: 0.85rem 1.5rem;
+  padding: 0.8rem 1.25rem;
   border-bottom: 1px solid var(--border);
-  transition: background 0.15s;
+  background: var(--bg-1);
+  transition: background 0.12s;
   align-items: center;
 }
-.compare-row:last-child { border-bottom: none; }
-.compare-row:hover { background: rgba(255,255,255,0.02); }
-.compare-row.winner-row { background: rgba(200,255,71,0.04); }
+.compare-r:last-child { border-bottom: none; }
+.compare-r:hover { background: var(--bg-2); }
+.compare-r.hl { background: rgba(26,137,23,0.04); }
+.cd { font-size: 0.845rem; font-weight: 400; color: var(--ink-2); }
+.cd.strong { color: var(--ink); font-weight: 600; }
+.ct { font-size: 0.8rem; font-weight: 500; color: var(--red); }
+.cu { font-size: 0.8rem; font-weight: 600; color: var(--green); }
+.cu.big { font-size: 0.875rem; }
 
-.c-desc { font-size: 0.875rem; font-weight: 300; color: var(--t2); }
-.c-desc.strong { color: var(--t1); font-weight: 500; }
-.c-them { font-size: 0.82rem; font-weight: 500; color: var(--red); font-family: 'Plus Jakarta Sans', sans-serif; }
-.c-us   { font-size: 0.82rem; font-weight: 600; color: var(--teal); font-family: 'Plus Jakarta Sans', sans-serif; }
-.c-us.lime { color: var(--lime); font-size: 0.9rem; }
-.c-them.big { font-size: 0.9rem; }
-
-/* ─────────────────────────────────────────────
-   HOURS
-───────────────────────────────────────────── */
-.hours-section { background: var(--bg-1); }
+/* ── HOURS ── */
+.hours-section { background: var(--bg-2); }
 
 .hours-layout {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 3rem;
-  margin-top: 3rem;
-  align-items: start;
+  gap: 2.5rem;
+  margin-top: 2.5rem;
 }
-@media (max-width: 700px) { .hours-layout { grid-template-columns: 1fr; } }
+@media (max-width: 680px) { .hours-layout { grid-template-columns: 1fr; } }
 
-.day-list { display: flex; flex-direction: column; gap: 0; border-radius: var(--r); overflow: hidden; border: 1px solid var(--border); }
-
+.day-list {
+  background: var(--bg-1);
+  border-radius: var(--r);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
 .day-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.1rem 1.5rem;
-  background: var(--bg-1);
+  padding: 1rem 1.5rem;
   border-bottom: 1px solid var(--border);
-  transition: background 0.15s;
+  transition: background 0.12s;
 }
 .day-row:last-child { border-bottom: none; }
 .day-row.active:hover { background: var(--bg-2); }
-.day-row.closed { opacity: 0.3; }
-
-.day-name-cell {
-  font-size: 0.925rem;
+.day-row.closed { opacity: 0.35; }
+.dr-name {
+  font-size: 0.9rem;
   font-weight: 500;
-  color: var(--t1);
+  color: var(--ink);
 }
-.day-row.closed .day-name-cell { color: var(--t3); }
-
-.day-time {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 0.875rem;
+.dr-time {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.845rem;
+  font-weight: 500;
+  color: var(--ink-2);
+}
+.peak-chip {
+  font-size: 0.62rem;
   font-weight: 700;
-  color: var(--t2);
-  letter-spacing: -0.01em;
-}
-.day-row.peak .day-time { color: var(--lime); }
-
-.peak-tag {
-  font-size: 0.65rem;
-  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--bg);
-  background: var(--lime);
-  padding: 0.15rem 0.5rem;
+  letter-spacing: 0.06em;
+  color: #fff;
+  background: var(--ink);
+  padding: 0.15rem 0.45rem;
   border-radius: 100px;
-  margin-left: 0.5rem;
 }
 
-.hours-notes { display: flex; flex-direction: column; gap: 1rem; }
-
-.hours-note-card {
-  background: var(--bg-2);
+.hours-notes {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.hn {
+  background: var(--bg-1);
   border: 1px solid var(--border);
   border-radius: var(--r-sm);
-  padding: 1.25rem 1.5rem;
+  padding: 1.1rem 1.25rem;
+  box-shadow: var(--shadow);
 }
-.hours-note-card.lime-border { border-color: rgba(200,255,71,0.25); background: var(--lime-dim); }
-.hnc-title {
+.hn.highlight { border-color: rgba(37,99,255,0.22); background: var(--blue-lt); }
+.hn-title {
   font-size: 0.8rem;
   font-weight: 600;
-  color: var(--t1);
-  margin-bottom: 0.4rem;
+  color: var(--ink);
+  margin-bottom: 0.35rem;
+  letter-spacing: -0.01em;
 }
-.hnc-body {
-  font-size: 0.85rem;
-  font-weight: 300;
-  color: var(--t2);
-  line-height: 1.65;
+.hn-body {
+  font-size: 0.82rem;
+  font-weight: 400;
+  color: var(--ink-2);
+  line-height: 1.6;
 }
 
-/* ─────────────────────────────────────────────
-   AMBASSADOR
-───────────────────────────────────────────── */
-.amb-section { background: var(--bg); }
+/* ── AMBASSADOR ── */
+.amb-section { background: var(--bg-1); }
 
 .amb-layout {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 4rem;
-  margin-top: 3rem;
+  gap: 3.5rem;
+  margin-top: 2.5rem;
   align-items: start;
 }
-@media (max-width: 800px) { .amb-layout { grid-template-columns: 1fr; gap: 2.5rem; } }
+@media (max-width: 760px) { .amb-layout { grid-template-columns: 1fr; } }
 
-.perks { display: flex; flex-direction: column; gap: 1px; background: var(--border); border-radius: var(--r); overflow: hidden; border: 1px solid var(--border); }
-
+.perk-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  background: var(--border);
+  border-radius: var(--r);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
 .perk {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 1.25rem;
-  padding: 1.5rem;
+  display: flex;
+  gap: 1rem;
+  padding: 1.35rem 1.5rem;
   background: var(--bg-1);
-  transition: background 0.15s;
+  transition: background 0.12s;
+  align-items: flex-start;
 }
 .perk:hover { background: var(--bg-2); }
 
-.perk-icon-wrap {
-  width: 40px; height: 40px;
-  background: var(--lime-dim);
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-.perk-icon {
-  width: 18px; height: 18px;
-  opacity: 0.9;
-}
-
-.perk-title {
-  font-family: 'Plus Jakarta Sans', sans-serif;
+.perk-num {
+  font-size: 0.72rem;
   font-weight: 700;
-  font-size: 0.95rem;
-  color: var(--white);
+  color: var(--ink-3);
+  min-width: 20px;
+  padding-top: 0.15rem;
+}
+.perk-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--ink);
   margin-bottom: 0.3rem;
   letter-spacing: -0.01em;
 }
 .perk-desc {
-  font-size: 0.84rem;
-  font-weight: 300;
-  color: var(--t2);
+  font-size: 0.825rem;
+  font-weight: 400;
+  color: var(--ink-2);
   line-height: 1.6;
 }
 
-.amb-apply-btn {
+.apply-btn {
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
-  margin-top: 1.5rem;
-  font-family: 'Outfit', sans-serif;
-  font-size: 0.9rem;
+  gap: 0.35rem;
+  margin-top: 1.25rem;
+  font-size: 0.875rem;
   font-weight: 600;
-  color: var(--bg);
-  background: var(--lime);
+  color: #fff;
+  background: var(--ink);
   border: none;
-  padding: 0.8rem 1.75rem;
+  padding: 0.75rem 1.5rem;
   border-radius: 100px;
   cursor: pointer;
   text-decoration: none;
   transition: all 0.18s;
+  letter-spacing: -0.01em;
 }
-.amb-apply-btn:hover { background: #d4ff5c; transform: translateY(-1px); box-shadow: 0 8px 24px rgba(200,255,71,0.25); }
+.apply-btn:hover { background: #1d52e8; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(37,99,255,0.35); }
 
-/* earnings card */
-.earnings-card {
-  background: var(--bg-1);
+.earn-card {
+  background: var(--bg-2);
   border: 1px solid var(--border);
   border-radius: var(--r);
   overflow: hidden;
+  box-shadow: var(--shadow);
   position: sticky;
-  top: 80px;
+  top: 70px;
 }
-.ec-header {
+.ec-head {
   padding: 1.25rem 1.5rem;
-  background: var(--bg-2);
+  background: var(--bg-1);
   border-bottom: 1px solid var(--border);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 }
-.ec-title {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-weight: 700;
-  font-size: 0.95rem;
-  color: var(--white);
+.ec-head-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--ink);
   letter-spacing: -0.01em;
+  margin-bottom: 0.1rem;
 }
-.ec-subtitle { font-size: 0.75rem; font-weight: 400; color: var(--t3); }
+.ec-head-sub { font-size: 0.75rem; font-weight: 400; color: var(--ink-3); }
 
 .ec-row {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  padding: 0.95rem 1.5rem;
+  padding: 0.85rem 1.5rem;
   border-bottom: 1px solid var(--border);
+  background: var(--bg-1);
 }
 .ec-row:last-of-type { border-bottom: none; }
-.ec-label { font-size: 0.875rem; font-weight: 300; color: var(--t2); }
-.ec-val { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.875rem; font-weight: 600; color: var(--t1); }
-.ec-val.green { color: var(--teal); }
+.ec-label { font-size: 0.82rem; font-weight: 400; color: var(--ink-2); }
+.ec-val   { font-size: 0.82rem; font-weight: 600; color: var(--ink); }
+.ec-val.g { color: var(--green); }
 
 .ec-total {
   padding: 1.5rem;
-  background: linear-gradient(135deg, rgba(200,255,71,0.1), rgba(200,255,71,0.04));
-  border-top: 1px solid rgba(200,255,71,0.2);
+  background: #2563FF;
   text-align: center;
 }
 .ec-total-label {
-  font-size: 0.72rem;
-  font-weight: 500;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--lime);
-  margin-bottom: 0.4rem;
+  color: rgba(255,255,255,0.45);
+  margin-bottom: 0.35rem;
 }
-.ec-total-number {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-weight: 800;
+.ec-total-num {
   font-size: 3.5rem;
-  color: var(--white);
+  font-weight: 700;
   letter-spacing: -0.04em;
+  color: #fff;
   line-height: 1;
 }
-.ec-total-number span { color: var(--lime); }
 .ec-total-sub {
-  font-size: 0.78rem;
+  font-size: 0.75rem;
   font-weight: 400;
-  color: var(--t3);
+  color: rgba(255,255,255,0.4);
   margin-top: 0.3rem;
 }
+.ec-note {
+  padding: 0.85rem 1.5rem;
+  background: var(--bg-2);
+  border-top: 1px solid var(--border);
+  font-size: 0.72rem;
+  font-weight: 400;
+  color: var(--ink-3);
+  line-height: 1.55;
+}
 
-/* ─────────────────────────────────────────────
-   RISKS
-───────────────────────────────────────────── */
-.risks-section { background: var(--bg-1); }
+/* ── RISKS ── */
+.risks-section { background: var(--bg-2); }
 
 .risk-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3,1fr);
   gap: 1rem;
-  margin-top: 3rem;
+  margin-top: 2.5rem;
 }
-@media (max-width: 800px) { .risk-grid { grid-template-columns: 1fr 1fr; } }
-@media (max-width: 500px) { .risk-grid { grid-template-columns: 1fr; } }
+@media (max-width: 760px) { .risk-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 480px) { .risk-grid { grid-template-columns: 1fr; } }
 
-.risk-card {
-  background: var(--bg-2);
+.risk {
+  background: var(--bg-1);
   border: 1px solid var(--border);
   border-radius: var(--r-sm);
   padding: 1.5rem;
-  transition: border-color 0.2s;
+  box-shadow: var(--shadow);
+  transition: all 0.15s;
 }
-.risk-card:hover { border-color: var(--border-2); }
+.risk:hover { box-shadow: var(--shadow-lg); transform: translateY(-2px); }
 
 .risk-badge {
   display: inline-block;
-  font-size: 0.65rem;
-  font-weight: 600;
+  font-size: 0.62rem;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  padding: 0.2rem 0.6rem;
+  letter-spacing: 0.06em;
+  padding: 0.18rem 0.55rem;
   border-radius: 100px;
-  margin-bottom: 1rem;
+  margin-bottom: 0.85rem;
 }
-.badge-low  { background: rgba(52,234,197,0.12); color: var(--teal); }
-.badge-med  { background: rgba(200,255,71,0.12);  color: var(--lime); }
+.rb-low { background: rgba(26,137,23,0.08); color: var(--green); }
+.rb-med { background: rgba(37,99,255,0.09); color: var(--blue); }
 
 .risk-title {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-weight: 700;
-  font-size: 0.95rem;
-  color: var(--white);
-  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 0.4rem;
   letter-spacing: -0.01em;
 }
-.risk-desc  { font-size: 0.82rem; font-weight: 300; color: var(--t2); line-height: 1.6; margin-bottom: 0.65rem; }
-.risk-mitigation { font-size: 0.78rem; font-weight: 400; color: var(--t3); line-height: 1.55; font-style: italic; }
+.risk-desc { font-size: 0.8rem; font-weight: 400; color: var(--ink-2); line-height: 1.6; margin-bottom: 0.55rem; }
+.risk-mit  { font-size: 0.76rem; font-weight: 400; color: var(--ink-3); line-height: 1.55; font-style: italic; }
 
-/* ─────────────────────────────────────────────
-   ORDER FORM
-───────────────────────────────────────────── */
-.order-section { background: var(--bg); }
+/* ── ORDER ── */
+.order-section { background: var(--bg-1); }
 
 .order-layout {
   display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap: 4rem;
-  margin-top: 3rem;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 3rem;
+  margin-top: 2.5rem;
   align-items: start;
 }
-@media (max-width: 800px) { .order-layout { grid-template-columns: 1fr; gap: 2.5rem; } }
+@media (max-width: 760px) { .order-layout { grid-template-columns: 1fr; } }
 
-/* form */
-.form-card {
-  background: var(--bg-1);
-  border: 1px solid var(--border);
-  border-radius: var(--r);
-  padding: 2.5rem;
-}
-
-.form-group { margin-bottom: 1.25rem; }
-
-.form-label {
-  display: block;
-  font-size: 0.78rem;
-  font-weight: 600;
-  color: var(--t2);
-  margin-bottom: 0.45rem;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-}
-
-.form-input, .form-select, .form-textarea {
-  width: 100%;
+.form-wrap {
   background: var(--bg-2);
   border: 1px solid var(--border);
-  border-radius: var(--r-sm);
-  padding: 0.8rem 1rem;
-  font-family: 'Outfit', sans-serif;
-  font-size: 0.9rem;
-  font-weight: 300;
-  color: var(--t1);
-  outline: none;
-  transition: border-color 0.18s, box-shadow 0.18s;
-  appearance: none;
+  border-radius: var(--r);
+  padding: 2rem;
+  box-shadow: var(--shadow);
 }
-.form-input:focus, .form-select:focus, .form-textarea:focus {
-  border-color: rgba(200,255,71,0.45);
-  box-shadow: 0 0 0 3px rgba(200,255,71,0.08);
-}
-.form-input::placeholder, .form-textarea::placeholder { color: var(--t3); }
-.form-textarea { resize: vertical; min-height: 105px; }
-.form-select option { background: var(--bg-2); }
 
-.form-hint {
-  font-size: 0.75rem;
-  font-weight: 300;
-  color: var(--t3);
-  margin-top: 0.35rem;
+.fg { margin-bottom: 1.1rem; }
+.fl {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink-2);
+  margin-bottom: 0.4rem;
+}
+.fi, .fs, .fta {
+  width: 100%;
+  background: var(--bg-1);
+  border: 1px solid var(--border);
+  border-radius: var(--r-xs);
+  padding: 0.75rem 0.9rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: var(--ink);
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  appearance: none;
+  -webkit-appearance: none;
+}
+.fi:focus, .fs:focus, .fta:focus {
+  border-color: rgba(37,99,255,0.45);
+  box-shadow: 0 0 0 3px rgba(37,99,255,0.08);
+}
+.fi::placeholder, .fta::placeholder { color: var(--ink-3); }
+.fta { resize: vertical; min-height: 100px; }
+.fs option { background: #fff; }
+.fhint {
+  font-size: 0.72rem;
+  font-weight: 400;
+  color: var(--ink-3);
+  margin-top: 0.3rem;
   line-height: 1.5;
 }
+.form-row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem; }
+@media (max-width: 480px) { .form-row2 { grid-template-columns: 1fr; } }
 
-.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-@media (max-width: 500px) { .form-row { grid-template-columns: 1fr; } }
-
-.submit-btn {
+.sub-btn {
   width: 100%;
-  background: var(--lime);
-  color: var(--bg);
+  background: #2563FF;
+  color: #fff;
   border: none;
   border-radius: 100px;
-  padding: 1rem;
-  font-family: 'Outfit', sans-serif;
-  font-size: 0.95rem;
-  font-weight: 700;
+  padding: 0.9rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s;
-  margin-top: 0.5rem;
-  letter-spacing: 0.01em;
+  transition: all 0.18s;
+  margin-top: 0.25rem;
+  letter-spacing: -0.01em;
 }
-.submit-btn:hover { background: #d4ff5c; transform: translateY(-1px); box-shadow: 0 8px 28px rgba(200,255,71,0.25); }
+.sub-btn:hover { background: #1d52e8; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(37,99,255,0.35); }
 
-/* sidebar */
-.order-sidebar { display: flex; flex-direction: column; gap: 1rem; position: sticky; top: 80px; }
+.order-side { display: flex; flex-direction: column; gap: 0.75rem; position: sticky; top: 70px; }
 
-.sidebar-card {
+.sc {
   background: var(--bg-1);
   border: 1px solid var(--border);
   border-radius: var(--r-sm);
-  padding: 1.25rem 1.5rem;
+  padding: 1.1rem 1.25rem;
+  box-shadow: var(--shadow);
 }
-.sidebar-card.lime-accent { border-color: rgba(200,255,71,0.2); background: var(--lime-dim); }
-
+.sc.blue-tint { border-color: rgba(37,99,255,0.2); background: var(--blue-lt); }
 .sc-title {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 0.85rem;
-  font-weight: 700;
-  color: var(--white);
-  margin-bottom: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 0.35rem;
   letter-spacing: -0.01em;
 }
 .sc-body {
-  font-size: 0.85rem;
-  font-weight: 300;
-  color: var(--t2);
-  line-height: 1.65;
+  font-size: 0.82rem;
+  font-weight: 400;
+  color: var(--ink-2);
+  line-height: 1.6;
 }
-.sc-body strong { color: var(--t1); font-weight: 500; }
+.sc-body strong { color: var(--ink); font-weight: 600; }
+.sc-body a { color: var(--blue); text-decoration: none; }
+.sc-body a:hover { text-decoration: underline; }
 
-.venmo-chip {
+.venmo-tag {
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
-  margin-top: 0.6rem;
-  padding: 0.3rem 0.75rem;
-  background: rgba(52,107,235,0.12);
-  border: 1px solid rgba(52,107,235,0.25);
-  border-radius: var(--r-sm);
-  font-size: 0.8rem;
+  gap: 0.3rem;
+  margin-top: 0.45rem;
+  padding: 0.25rem 0.65rem;
+  background: rgba(0,104,255,0.08);
+  border: 1px solid rgba(0,104,255,0.18);
+  border-radius: var(--r-xs);
+  font-size: 0.78rem;
   font-weight: 600;
-  color: #6B9EFF;
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  color: #0068FF;
+  font-family: 'Inter', sans-serif;
 }
 
-/* ─────────────────────────────────────────────
-   FOOTER
-───────────────────────────────────────────── */
+/* ── FOOTER ── */
 footer {
-  background: var(--bg-1);
+  background: var(--bg-2);
   border-top: 1px solid var(--border);
   padding: 4rem 2rem 2.5rem;
 }
-.footer-inner {
-  max-width: 1120px;
+.foot-inner {
+  max-width: 1040px;
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1.5fr 1fr 1fr 1fr;
   gap: 3rem;
-  padding-bottom: 3rem;
+  padding-bottom: 2.5rem;
   border-bottom: 1px solid var(--border);
 }
-@media (max-width: 800px) { .footer-inner { grid-template-columns: 1fr 1fr; } }
-@media (max-width: 500px) { .footer-inner { grid-template-columns: 1fr; } }
+@media (max-width: 760px) { .foot-inner { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 480px) { .foot-inner { grid-template-columns: 1fr; } }
 
-.footer-logo-name {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-weight: 800;
-  font-size: 1.4rem;
-  letter-spacing: -0.03em;
-  color: var(--white);
-  margin-bottom: 0.5rem;
-}
-.footer-logo-name span { color: var(--lime); }
-.footer-tagline { font-size: 0.85rem; font-weight: 300; color: var(--t3); line-height: 1.6; max-width: 240px; }
+.foot-logo { font-size: 1.1rem; font-weight: 700; letter-spacing: -0.03em; color: var(--ink); margin-bottom: 0.45rem; }
+.foot-tag  { font-size: 0.82rem; font-weight: 400; color: var(--ink-3); line-height: 1.6; max-width: 220px; }
 
-.footer-col-label {
-  font-size: 0.72rem;
-  font-weight: 600;
+.foot-col-label {
+  font-size: 0.68rem;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--t3);
-  margin-bottom: 1rem;
+  letter-spacing: 0.08em;
+  color: var(--ink-3);
+  margin-bottom: 0.85rem;
 }
-.footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
-.footer-links a { font-size: 0.875rem; font-weight: 300; color: var(--t2); text-decoration: none; transition: color 0.15s; }
-.footer-links a:hover { color: var(--t1); }
+.foot-links { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+.foot-links a { font-size: 0.845rem; font-weight: 400; color: var(--ink-2); text-decoration: none; transition: color 0.12s; }
+.foot-links a:hover { color: var(--ink); }
 
-.footer-bottom {
-  max-width: 1120px;
+.foot-bottom {
+  max-width: 1040px;
   margin: 2rem auto 0;
   display: flex;
   justify-content: space-between;
@@ -1060,193 +975,172 @@ footer {
   gap: 2rem;
   flex-wrap: wrap;
 }
-.footer-disclaimer { font-size: 0.72rem; font-weight: 300; color: var(--t3); line-height: 1.7; max-width: 680px; }
-.footer-copy { font-size: 0.78rem; font-weight: 400; color: var(--t3); white-space: nowrap; }
+.foot-disclaimer {
+  font-size: 0.7rem;
+  font-weight: 400;
+  color: var(--ink-3);
+  line-height: 1.65;
+  max-width: 640px;
+}
+.foot-copy { font-size: 0.75rem; font-weight: 400; color: var(--ink-3); white-space: nowrap; }
 
-/* ─────────────────────────────────────────────
-   TOAST
-───────────────────────────────────────────── */
+/* ── TOAST ── */
 #toast {
   position: fixed;
   bottom: 2rem;
   left: 50%;
   transform: translateX(-50%) translateY(80px);
-  background: var(--bg-2);
-  border: 1px solid rgba(200,255,71,0.3);
-  color: var(--t1);
-  padding: 0.9rem 1.75rem;
+  background: #2563FF;
+  color: #fff;
+  padding: 0.85rem 1.75rem;
   border-radius: 100px;
-  font-size: 0.875rem;
+  font-size: 0.845rem;
   font-weight: 500;
   z-index: 9999;
   transition: transform 0.4s cubic-bezier(.34,1.56,.64,1);
   white-space: nowrap;
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  box-shadow: 0 16px 48px rgba(0,0,0,0.4);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+  letter-spacing: -0.01em;
 }
-#toast::before { content: ''; width: 8px; height: 8px; background: var(--lime); border-radius: 50%; flex-shrink: 0; }
 #toast.show { transform: translateX(-50%) translateY(0); }
 
-/* ─────────────────────────────────────────────
-   ANIMATIONS
-───────────────────────────────────────────── */
-@keyframes slideDown {
-  from { opacity: 0; transform: translateY(-12px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
+/* ── ANIMATIONS ── */
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(16px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from { opacity:0; transform:translateY(14px); }
+  to   { opacity:1; transform:translateY(0); }
 }
-
 .reveal {
   opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.55s cubic-bezier(.22,1,.36,1), transform 0.55s cubic-bezier(.22,1,.36,1);
+  transform: translateY(16px);
+  transition: opacity 0.5s cubic-bezier(.22,1,.36,1), transform 0.5s cubic-bezier(.22,1,.36,1);
 }
-.reveal.visible { opacity: 1; transform: translateY(0); }
-.reveal.delay-1 { transition-delay: 0.08s; }
-.reveal.delay-2 { transition-delay: 0.16s; }
-.reveal.delay-3 { transition-delay: 0.24s; }
+.reveal.d1 { transition-delay: 0.07s; }
+.reveal.d2 { transition-delay: 0.14s; }
+.reveal.visible { opacity:1; transform:translateY(0); }
 
 </style>
 </head>
 <body>
 
-<!-- ── NAV ── -->
+<!-- NAV -->
 <nav>
-  <a href="#" class="logo">Rünr<span class="logo-dot">.</span></a>
-  <div class="nav-center">
-    <a href="#how">How It Works</a>
-    <a href="#pricing">Pricing</a>
-    <a href="#hours">Hours</a>
-    <a href="#ambassador">Earn</a>
-  </div>
+  <a href="#" class="logo">Pronto</a>
+  <ul class="nav-links">
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#hours">Hours</a></li>
+    <li><a href="#ambassador">Earn</a></li>
+  </ul>
   <div class="nav-right">
-    <div class="status-chip">
-      <div class="s-dot" id="statusDot"></div>
+    <div class="status-tag">
+      <div class="sdot" id="statusDot"></div>
       <span id="statusText">—</span>
     </div>
-    <a href="#order" class="btn-nav">Order Now</a>
+    <a href="#order" class="btn-cta">Order Now</a>
   </div>
 </nav>
 
-<!-- ── HERO ── -->
+<!-- HERO -->
 <div class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-blob"></div>
+  <div class="hero-bg-blur"></div>
   <div class="hero-content">
-    <div class="hero-badge">
-      <span class="badge-pill">UNC Chapel Hill</span>
-      Campus delivery, finally affordable
+    <div class="hero-label">
+      <div class="label-dot"></div>
+      UNC Chapel Hill · Campus Delivery
     </div>
     <h1 class="hero-h1">
-      Food at your<br>door. <span class="accent">30% less</span><br><span class="dim">than DoorDash.</span>
+      Delivery that<br>
+      doesn't rip<br>
+      <span class="muted">you off.</span>
     </h1>
-    <p class="hero-sub">Real restaurant food delivered to your dorm — no food markup, no surge pricing, no tip pressure. Run by a fellow Tar Heel who's also done paying $33 for an $18 meal.</p>
-    <div class="hero-ctas">
-      <a href="#order" class="btn-primary">Place an Order &rarr;</a>
-      <a href="#ambassador" class="btn-ghost">Earn as Ambassador</a>
+    <p class="hero-p">Franklin Street restaurants delivered to your dorm. No food markup, no surge pricing, no pressure to tip. Run by a fellow Tar Heel.</p>
+    <div class="hero-btns">
+      <a href="#order" class="btn-primary">Place an Order</a>
+      <a href="#ambassador" class="btn-secondary">Earn as Ambassador</a>
     </div>
   </div>
   <div class="hero-metrics">
-    <div class="metric">
-      <div class="metric-val lime">$4.99</div>
-      <div class="metric-label">Flat delivery fee</div>
-    </div>
-    <div class="metric">
-      <div class="metric-val">8%</div>
-      <div class="metric-label">Service fee (DoorDash: 15%+)</div>
-    </div>
-    <div class="metric">
-      <div class="metric-val">~30%</div>
-      <div class="metric-label">Cheaper than DoorDash</div>
-    </div>
-    <div class="metric">
-      <div class="metric-val">35 min</div>
-      <div class="metric-label">Average delivery time</div>
-    </div>
+    <div class="hm"><div class="hm-val">$4.99</div><div class="hm-label">Flat delivery fee</div></div>
+    <div class="hm"><div class="hm-val">8%</div><div class="hm-label">Service fee (DoorDash: 15%+)</div></div>
+    <div class="hm"><div class="hm-val">~30%</div><div class="hm-label">Cheaper than DoorDash</div></div>
+    <div class="hm"><div class="hm-val">35 min</div><div class="hm-label">Average delivery</div></div>
   </div>
 </div>
 
-<!-- ── TICKER ── -->
+<!-- TICKER -->
 <div class="ticker">
   <div class="ticker-track">
-    <span class="ticker-item">No food markup</span>
-    <span class="ticker-item">No surge pricing</span>
-    <span class="ticker-item">No tip pressure</span>
-    <span class="ticker-item">No download required</span>
-    <span class="ticker-item">Chapel Hill campus delivery</span>
-    <span class="ticker-item">Student run</span>
-    <span class="ticker-item">Affordable</span>
-    <span class="ticker-item">Fast</span>
-    <span class="ticker-item">No food markup</span>
-    <span class="ticker-item">No surge pricing</span>
-    <span class="ticker-item">No tip pressure</span>
-    <span class="ticker-item">No download required</span>
-    <span class="ticker-item">Chapel Hill campus delivery</span>
-    <span class="ticker-item">Student run</span>
-    <span class="ticker-item">Affordable</span>
-    <span class="ticker-item">Fast</span>
+    <span class="t-item">No food markup</span>
+    <span class="t-item">No surge pricing</span>
+    <span class="t-item">No tip pressure</span>
+    <span class="t-item">No download required</span>
+    <span class="t-item">Student run</span>
+    <span class="t-item">Chapel Hill</span>
+    <span class="t-item">Fast and affordable</span>
+    <span class="t-item">No food markup</span>
+    <span class="t-item">No surge pricing</span>
+    <span class="t-item">No tip pressure</span>
+    <span class="t-item">No download required</span>
+    <span class="t-item">Student run</span>
+    <span class="t-item">Chapel Hill</span>
+    <span class="t-item">Fast and affordable</span>
   </div>
 </div>
 
-<!-- ── HOW IT WORKS ── -->
+<!-- HOW -->
 <section id="how" class="section how-section">
   <div class="section-inner">
-    <div class="how-header reveal">
+    <div class="how-top reveal">
       <div>
-        <div class="eyebrow">The Process</div>
-        <h2 class="section-h2">How it works</h2>
+        <div class="s-eyebrow">The Process</div>
+        <h2 class="s-h2">How it works</h2>
       </div>
-      <p class="section-p">No app download. No account. Fill out a form, get a text, and your food shows up. That's the whole thing.</p>
+      <p class="s-p">No app. No account. Fill out a form, get a text, food shows up. That's the whole thing.</p>
     </div>
-    <div class="steps-grid reveal">
-      <div class="step-card">
-        <div class="step-number">01</div>
+    <div class="steps reveal">
+      <div class="step">
+        <div class="step-n">Step 01</div>
         <div class="step-title">Fill the form</div>
-        <div class="step-desc">Tell us your restaurant, order, dorm, and Venmo. Under 60 seconds. No account or download required.</div>
+        <div class="step-desc">Tell us your restaurant, order, dorm, and Venmo. Takes under 60 seconds. No account or download required.</div>
       </div>
-      <div class="step-card">
-        <div class="step-number">02</div>
+      <div class="step">
+        <div class="step-n">Step 02</div>
         <div class="step-title">Get confirmed</div>
-        <div class="step-desc">Text confirmation with your total and ETA within 5 minutes. We'll flag anything unavailable before placing.</div>
+        <div class="step-desc">Text confirmation with your total and ETA within 5 minutes. We'll flag anything unavailable before placing your order.</div>
       </div>
-      <div class="step-card">
-        <div class="step-number">03</div>
+      <div class="step">
+        <div class="step-n">Step 03</div>
         <div class="step-title">We pick it up</div>
-        <div class="step-desc">Order placed and picked up fresh. Everything travels in insulated bags. Second text when we're headed your way.</div>
+        <div class="step-desc">Order placed, food picked up fresh in an insulated bag. Second text when we're heading your way.</div>
       </div>
-      <div class="step-card">
-        <div class="step-number">04</div>
+      <div class="step">
+        <div class="step-n">Step 04</div>
         <div class="step-title">Delivered to you</div>
-        <div class="step-desc">Final text when we're at your building. Meet us at the lobby. Pay via Venmo at drop-off, or send early — your call.</div>
+        <div class="step-desc">Final text when we're at your building. Meet us at the lobby. Pay via Venmo at drop-off — or send early if you prefer.</div>
       </div>
     </div>
-    <div class="group-callout reveal">
-      <div class="callout-label">Group Orders</div>
-      <div class="callout-text">Ordering with 3+ people? Submit one group order and split a flat $6.99 delivery fee — that's under $2.50 per person. The person who organizes it gets 10% off their item. Select Group Order in the form below.</div>
+    <div class="info-strip reveal">
+      <div class="strip-tag">Group Orders</div>
+      <div class="strip-text">Ordering with 3 or more people? Submit one group order and split a flat $6.99 delivery fee — under $2.50 per person. The organizer gets 10% off their own item as a thank you. Just select Group Order in the form.</div>
     </div>
   </div>
 </section>
 
-<!-- ── PRICING ── -->
+<!-- PRICING -->
 <section id="pricing" class="section pricing-section">
   <div class="section-inner">
     <div class="reveal">
-      <div class="eyebrow">Transparent Pricing</div>
-      <h2 class="section-h2">No hidden fees. Ever.</h2>
-      <p class="section-p">You pay what the restaurant charges. We add a small delivery fee and an 8% service fee. Nothing else.</p>
+      <div class="s-eyebrow">Transparent Pricing</div>
+      <h2 class="s-h2">No hidden fees. Ever.</h2>
+      <p class="s-p">You pay what the restaurant charges. We add a small delivery and service fee — and that's it.</p>
     </div>
-    <div class="pricing-grid">
-      <div class="price-card reveal">
-        <div class="price-type">Solo Order</div>
-        <div class="price-sub">One person, one drop-off</div>
-        <div class="price-amount">$4.99</div>
-        <div class="price-unit">flat delivery fee</div>
-        <ul class="price-list">
+    <div class="price-cards">
+      <div class="pc reveal">
+        <div class="pc-type">Solo Order</div>
+        <div class="pc-sub">One person, one drop-off</div>
+        <div class="pc-price">$4.99</div>
+        <div class="pc-unit">flat delivery fee</div>
+        <ul class="pc-list">
           <li>+ 8% service fee on food subtotal</li>
           <li>Minimum $10 order</li>
           <li>Zone A (South Campus – Franklin): included</li>
@@ -1254,287 +1148,230 @@ footer {
           <li>Text updates at every stage</li>
         </ul>
       </div>
-      <div class="price-card featured reveal delay-1">
-        <div class="featured-label">Best Value</div>
-        <div class="price-type">Group Order</div>
-        <div class="price-sub">3+ people, one building, one trip</div>
-        <div class="price-amount">$6.99</div>
-        <div class="price-unit">flat group fee</div>
-        <ul class="price-list">
-          <li>+ 8% service fee on combined subtotal</li>
+      <div class="pc featured reveal d1">
+        <div class="pc-tag">Best Value</div>
+        <div class="pc-type">Group Order</div>
+        <div class="pc-sub">3+ people, one building</div>
+        <div class="pc-price">$6.99</div>
+        <div class="pc-unit">flat group fee</div>
+        <ul class="pc-list">
+          <li>+ 8% service fee on combined total</li>
           <li>Minimum $25 combined order</li>
           <li>Up to 6 people per group</li>
           <li>Single lobby drop-off</li>
           <li>Organizer gets 10% off their item</li>
         </ul>
       </div>
-      <div class="price-card reveal delay-2">
-        <div class="price-type">Weekend Late Night</div>
-        <div class="price-sub">Fri & Sat after midnight</div>
-        <div class="price-amount">$5.99</div>
-        <div class="price-unit">delivery fee</div>
-        <ul class="price-list">
+      <div class="pc reveal d2">
+        <div class="pc-type">Weekend Late Night</div>
+        <div class="pc-sub">Fri & Sat after midnight</div>
+        <div class="pc-price">$5.99</div>
+        <div class="pc-unit">delivery fee</div>
+        <ul class="pc-list">
           <li>+ 8% service fee</li>
-          <li>12AM – 2AM Fri/Sat only</li>
+          <li>12AM – 2AM Friday & Saturday only</li>
           <li>Limited capacity — order early</li>
-          <li>Same ETA, same insulated bags</li>
-          <li>Still way cheaper than DoorDash surge</li>
+          <li>Same insulated bag delivery</li>
+          <li>Still cheaper than DoorDash surge</li>
         </ul>
       </div>
     </div>
-
-    <div class="compare-strip reveal" style="margin-top:2rem;">
-      <div class="compare-head">
-        <span>$18 meal — side by side</span>
+    <div class="compare reveal">
+      <div class="compare-hd">
+        <span>$18 meal — head to head</span>
         <span>DoorDash</span>
-        <span class="h-us">Rünr</span>
+        <span class="us">Pronto</span>
       </div>
-      <div class="compare-row">
-        <span class="c-desc">Food price</span>
-        <span class="c-them">~$20.70 (+15%)</span>
-        <span class="c-us">$18.00</span>
-      </div>
-      <div class="compare-row">
-        <span class="c-desc">Delivery fee</span>
-        <span class="c-them">$5.99</span>
-        <span class="c-us">$4.99</span>
-      </div>
-      <div class="compare-row">
-        <span class="c-desc">Service fee</span>
-        <span class="c-them">$3.49</span>
-        <span class="c-us">$1.44</span>
-      </div>
-      <div class="compare-row">
-        <span class="c-desc">Tip pressure</span>
-        <span class="c-them">$3.00+</span>
-        <span class="c-us">None</span>
-      </div>
-      <div class="compare-row winner-row">
-        <span class="c-desc strong">Total</span>
-        <span class="c-them big">~$33.18</span>
-        <span class="c-us lime">$24.43</span>
-      </div>
-      <div class="compare-row">
-        <span class="c-desc" style="color:var(--lime)">You save</span>
-        <span class="c-them"></span>
-        <span class="c-us" style="color:var(--lime); font-size:0.9rem;">$8.75 — 26%</span>
-      </div>
+      <div class="compare-r"><span class="cd">Food price</span><span class="ct">~$20.70 (+15%)</span><span class="cu">$18.00</span></div>
+      <div class="compare-r"><span class="cd">Delivery fee</span><span class="ct">$5.99</span><span class="cu">$4.99</span></div>
+      <div class="compare-r"><span class="cd">Service fee</span><span class="ct">$3.49</span><span class="cu">$1.44</span></div>
+      <div class="compare-r"><span class="cd">Tip pressure</span><span class="ct">$3.00+</span><span class="cu">None</span></div>
+      <div class="compare-r hl"><span class="cd strong">Total</span><span class="ct" style="font-size:.9rem;font-weight:700">~$33.18</span><span class="cu big">$24.43</span></div>
+      <div class="compare-r"><span class="cd" style="color:var(--green);font-weight:600">You save</span><span class="ct"></span><span class="cu big">$8.75 — 26%</span></div>
     </div>
   </div>
 </section>
 
-<!-- ── HOURS ── -->
+<!-- HOURS -->
 <section id="hours" class="section hours-section">
   <div class="section-inner">
     <div class="reveal">
-      <div class="eyebrow">When We Run</div>
-      <h2 class="section-h2">Hours</h2>
-      <p class="section-p">Evenings and late nights, when the dining hall is closed and you actually need delivery.</p>
+      <div class="s-eyebrow">When We Run</div>
+      <h2 class="s-h2">Hours</h2>
+      <p class="s-p">Evenings and late nights — when the dining hall is closed and you actually need delivery.</p>
     </div>
     <div class="hours-layout">
       <div class="day-list reveal">
-        <div class="day-row closed">
-          <span class="day-name-cell">Monday</span>
-          <span class="day-time">Closed</span>
-        </div>
-        <div class="day-row active">
-          <span class="day-name-cell">Tuesday</span>
-          <span class="day-time">9PM – 12AM</span>
-        </div>
-        <div class="day-row active">
-          <span class="day-name-cell">Wednesday</span>
-          <span class="day-time">9PM – 12AM</span>
-        </div>
-        <div class="day-row active peak">
-          <span class="day-name-cell">Thursday</span>
-          <span class="day-time">9PM – 1AM <span class="peak-tag">Peak</span></span>
-        </div>
-        <div class="day-row active peak">
-          <span class="day-name-cell">Friday</span>
-          <span class="day-time">9PM – 2AM <span class="peak-tag">Peak</span></span>
-        </div>
-        <div class="day-row active peak">
-          <span class="day-name-cell">Saturday</span>
-          <span class="day-time">9PM – 2AM <span class="peak-tag">Peak</span></span>
-        </div>
-        <div class="day-row closed">
-          <span class="day-name-cell">Sunday</span>
-          <span class="day-time">Closed</span>
-        </div>
+        <div class="day-row closed"><span class="dr-name">Monday</span><span class="dr-time">Closed</span></div>
+        <div class="day-row active"><span class="dr-name">Tuesday</span><span class="dr-time">9PM – 12AM</span></div>
+        <div class="day-row active"><span class="dr-name">Wednesday</span><span class="dr-time">9PM – 12AM</span></div>
+        <div class="day-row active peak"><span class="dr-name">Thursday</span><span class="dr-time">9PM – 1AM <span class="peak-chip">Peak</span></span></div>
+        <div class="day-row active peak"><span class="dr-name">Friday</span><span class="dr-time">9PM – 2AM <span class="peak-chip">Peak</span></span></div>
+        <div class="day-row active peak"><span class="dr-name">Saturday</span><span class="dr-time">9PM – 2AM <span class="peak-chip">Peak</span></span></div>
+        <div class="day-row closed"><span class="dr-name">Sunday</span><span class="dr-time">Closed</span></div>
       </div>
-      <div class="hours-notes reveal delay-1">
-        <div class="hours-note-card lime-border">
-          <div class="hnc-title">Currently</div>
-          <div class="hnc-body" id="currentStatusCard">Checking hours…</div>
+      <div class="hours-notes">
+        <div class="hn highlight reveal d1">
+          <div class="hn-title">Right now</div>
+          <div class="hn-body" id="statusCard">Checking hours…</div>
         </div>
-        <div class="hours-note-card">
-          <div class="hnc-title">Last orders</div>
-          <div class="hnc-body">Place your order at least 20 minutes before closing. We may stop accepting orders early on high-demand nights.</div>
+        <div class="hn reveal d1">
+          <div class="hn-title">Last orders</div>
+          <div class="hn-body">Place your order at least 20 minutes before close. We may stop accepting early on high-demand nights.</div>
         </div>
-        <div class="hours-note-card">
-          <div class="hnc-title">Real-time updates</div>
-          <div class="hnc-body">Follow <strong>@runr.unc</strong> on Instagram for live status updates. We post when we're about to close or at capacity.</div>
+        <div class="hn reveal d1">
+          <div class="hn-title">Live updates</div>
+          <div class="hn-body">Follow <strong>@prontounc</strong> on Instagram for real-time status. We post when we're near capacity or closing early.</div>
         </div>
-        <div class="hours-note-card">
-          <div class="hnc-title">Why these hours?</div>
-          <div class="hnc-body">Late nights are when DoorDash surge pricing kicks in, the dining hall is closed, and you're hungry mid-problem-set. We're built specifically for that window.</div>
+        <div class="hn reveal d1">
+          <div class="hn-title">Why these hours?</div>
+          <div class="hn-body">Late nights are when DoorDash surges, the dining hall is closed, and you're hungry mid-problem-set. That's exactly the window we're built for.</div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ── AMBASSADOR ── -->
+<!-- AMBASSADOR -->
 <section id="ambassador" class="section amb-section">
   <div class="section-inner">
     <div class="reveal">
-      <div class="eyebrow">The Ambassador Program</div>
-      <h2 class="section-h2">Earn on your schedule.</h2>
-      <p class="section-p">Deliver when you want, keep most of the fee, get a discount on your own orders. No boss. No shifts. Just claims from a shared queue.</p>
+      <div class="s-eyebrow">Ambassador Program</div>
+      <h2 class="s-h2">Earn on your schedule.</h2>
+      <p class="s-p">Deliver when you want, keep most of the fee, get a discount on your own orders. No boss, no shifts.</p>
     </div>
     <div class="amb-layout">
       <div class="reveal">
-        <div class="perks">
+        <div class="perk-list">
           <div class="perk">
-            <div class="perk-icon-wrap">
-              <svg class="perk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--lime)"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-            </div>
+            <div class="perk-num">01</div>
             <div>
               <div class="perk-title">Keep $3.75 per delivery</div>
-              <div class="perk-desc">We take a $1.00 platform fee. You keep the rest. Group orders pay $5.25. 12–15 deliveries a week puts you at $50–60 without a fixed schedule.</div>
+              <div class="perk-desc">We take a $1.00 platform fee. You keep the rest. Group orders pay $5.25. Do 12–15 deliveries a week and you're clearing $50–60 without a fixed schedule.</div>
             </div>
           </div>
           <div class="perk">
-            <div class="perk-icon-wrap">
-              <svg class="perk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--lime)"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            </div>
+            <div class="perk-num">02</div>
             <div>
               <div class="perk-title">Total schedule freedom</div>
-              <div class="perk-desc">Orders come into a shared queue. Claim what you want, skip what you don't. No minimums, no obligations — built around class and study hours.</div>
+              <div class="perk-desc">Orders come into a shared queue. Claim what you want, pass on what you don't. No minimums or obligations — built around class and everything else you have going on.</div>
             </div>
           </div>
           <div class="perk">
-            <div class="perk-icon-wrap">
-              <svg class="perk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--lime)"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-            </div>
+            <div class="perk-num">03</div>
             <div>
               <div class="perk-title">15% off your own orders</div>
-              <div class="perk-desc">Active ambassadors (5+ deliveries/week) get a personal promo code — 15% off the service fee on personal orders. Higher tiers unlock larger discounts.</div>
+              <div class="perk-desc">Active ambassadors completing 5+ deliveries per week get a personal promo code — 15% off the service fee on personal orders. Higher tiers unlock bigger discounts.</div>
             </div>
           </div>
           <div class="perk">
-            <div class="perk-icon-wrap">
-              <svg class="perk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--lime)"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
-            </div>
+            <div class="perk-num">04</div>
             <div>
-              <div class="perk-title">All tips are yours</div>
-              <div class="perk-desc">We don't take a cut of tips. Whatever a customer adds via Venmo is yours, 100%. No platform deduction, ever.</div>
+              <div class="perk-title">All tips go straight to you</div>
+              <div class="perk-desc">We don't touch tips. Whatever a customer sends via Venmo is yours, 100%. No deduction, ever.</div>
             </div>
           </div>
         </div>
-        <a href="mailto:runrdelivery@gmail.com?subject=Ambassador%20Application" class="amb-apply-btn">Apply to Become an Ambassador &rarr;</a>
+        <a href="mailto:rguzm@unc.edu?subject=Ambassador%20Application" class="apply-btn">Apply to Be an Ambassador →</a>
       </div>
 
-      <div class="earnings-card reveal delay-1">
-        <div class="ec-header">
-          <div>
-            <div class="ec-title">Estimated Earnings</div>
-            <div class="ec-subtitle">Based on 4 nights/week, bike delivery</div>
-          </div>
+      <div class="earn-card reveal d1">
+        <div class="ec-head">
+          <div class="ec-head-title">Estimated Weekly Earnings</div>
+          <div class="ec-head-sub">Based on 4 nights/week, bike delivery</div>
         </div>
         <div class="ec-row"><span class="ec-label">Deliveries per night</span><span class="ec-val">3</span></div>
         <div class="ec-row"><span class="ec-label">Nights active per week</span><span class="ec-val">4</span></div>
         <div class="ec-row"><span class="ec-label">Your cut per delivery</span><span class="ec-val">$3.75</span></div>
         <div class="ec-row"><span class="ec-label">Estimated tips</span><span class="ec-val">~$1.00 / order</span></div>
-        <div class="ec-row"><span class="ec-label">Delivery earnings</span><span class="ec-val green">$45 / week</span></div>
-        <div class="ec-row"><span class="ec-label">Tip earnings</span><span class="ec-val green">$12 / week</span></div>
+        <div class="ec-row"><span class="ec-label">Delivery earnings</span><span class="ec-val g">$45 / week</span></div>
+        <div class="ec-row"><span class="ec-label">Tip earnings</span><span class="ec-val g">$12 / week</span></div>
         <div class="ec-total">
           <div class="ec-total-label">Gross Weekly</div>
-          <div class="ec-total-number"><span>$</span>57</div>
-          <div class="ec-total-sub">~$14/hr · beats dining hall wages</div>
+          <div class="ec-total-num">$57</div>
+          <div class="ec-total-sub">~$14/hr — beats dining hall wages</div>
         </div>
-        <div style="padding:1rem 1.5rem; border-top:1px solid var(--border);">
-          <p style="font-size:0.72rem; font-weight:300; color:var(--t3); line-height:1.6;">Estimates only. Actual earnings vary by demand, speed, and tips. Ambassadors are independent contractors.</p>
-        </div>
+        <div class="ec-note">Estimates only. Actual earnings vary. Ambassadors are independent contractors responsible for their own tax reporting.</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ── RISKS ── -->
+<!-- RISKS -->
 <section id="risks" class="section risks-section">
   <div class="section-inner">
     <div class="reveal">
-      <div class="eyebrow">Transparency</div>
-      <h2 class="section-h2">What you should know</h2>
-      <p class="section-p">We're student-run. Here's an honest breakdown of risks and how we handle them.</p>
+      <div class="s-eyebrow">Transparency</div>
+      <h2 class="s-h2">What you should know</h2>
+      <p class="s-p">We're student-run. Here's an honest look at risks and how we handle them.</p>
     </div>
     <div class="risk-grid">
-      <div class="risk-card reveal">
-        <span class="risk-badge badge-low">Low Risk</span>
+      <div class="risk reveal">
+        <span class="risk-badge rb-low">Low Risk</span>
         <div class="risk-title">Food Safety</div>
-        <div class="risk-desc">Rünr is a courier only. We transport sealed food from licensed restaurants — we never prepare, store, or alter food at any point.</div>
-        <div class="risk-mitigation">All deliveries in insulated bags. This legally exempts us from NC food service licensing requirements.</div>
+        <div class="risk-desc">Pronto is a courier only. We transport sealed, restaurant-prepared food. We never prepare, store, or alter food.</div>
+        <div class="risk-mit">Legally exempts us from NC food service licensing. All food travels in insulated bags, sealed at the restaurant.</div>
       </div>
-      <div class="risk-card reveal delay-1">
-        <span class="risk-badge badge-med">Medium Risk</span>
+      <div class="risk reveal d1">
+        <span class="risk-badge rb-med">Medium Risk</span>
         <div class="risk-title">UNC Campus Policy</div>
-        <div class="risk-desc">The university restricts commercial activity on campus grounds. Increased visibility could prompt pushback from administration.</div>
-        <div class="risk-mitigation">We deliver to building entrances only — not inside dorms. We don't solicit on campus property.</div>
+        <div class="risk-desc">The university restricts commercial activity on campus grounds. Visibility could prompt attention from administration.</div>
+        <div class="risk-mit">We deliver to building entrances only — not inside dorms. We don't solicit on university property.</div>
       </div>
-      <div class="risk-card reveal delay-2">
-        <span class="risk-badge badge-low">Low Risk</span>
+      <div class="risk reveal d2">
+        <span class="risk-badge rb-low">Low Risk</span>
         <div class="risk-title">Worker Classification</div>
-        <div class="risk-desc">Ambassadors are independent contractors who set their own hours, use their own equipment, and can decline any order at any time.</div>
-        <div class="risk-mitigation">Ambassadors earning over $600/year receive a 1099. We don't dictate schedules — both legally essential distinctions.</div>
+        <div class="risk-desc">Ambassadors are independent contractors who set their own hours, use their own equipment, and can decline any order.</div>
+        <div class="risk-mit">Ambassadors earning over $600/year receive a 1099. We don't control schedules — a key legal distinction.</div>
       </div>
-      <div class="risk-card reveal">
-        <span class="risk-badge badge-low">Low Risk</span>
+      <div class="risk reveal">
+        <span class="risk-badge rb-low">Low Risk</span>
         <div class="risk-title">Payment Disputes</div>
-        <div class="risk-desc">Venmo payments are typically final. Restaurant errors aren't our fault, but we'll advocate on your behalf every time.</div>
-        <div class="risk-mitigation">We confirm every order via text before placing. Photo of receipt available on request. Our mistakes are always made right.</div>
+        <div class="risk-desc">Venmo payments are typically final. Restaurant errors aren't our fault, but we'll always advocate on your behalf.</div>
+        <div class="risk-mit">Every order confirmed via text before placing. Photo of receipt available on request. Our mistakes are always made right.</div>
       </div>
-      <div class="risk-card reveal delay-1">
-        <span class="risk-badge badge-med">Medium Risk</span>
+      <div class="risk reveal d1">
+        <span class="risk-badge rb-med">Medium Risk</span>
         <div class="risk-title">Capacity & Weather</div>
-        <div class="risk-desc">We're a small team. High-demand nights may hit capacity before close. Severe weather may suspend service for safety.</div>
-        <div class="risk-mitigation">Real-time status on Instagram. No charge if we can't fulfill. Closures posted by 8:30PM on affected nights.</div>
+        <div class="risk-desc">We're a small team. High-demand nights may hit capacity before close. Severe weather may pause service.</div>
+        <div class="risk-mit">Real-time updates on Instagram. No charge if we can't fulfill. Closures posted by 8:30PM on affected nights.</div>
       </div>
-      <div class="risk-card reveal delay-2">
-        <span class="risk-badge badge-low">Low Risk</span>
+      <div class="risk reveal d2">
+        <span class="risk-badge rb-low">Low Risk</span>
         <div class="risk-title">Business & Taxes</div>
-        <div class="risk-desc">Rünr operates as a legitimate NC courier business. All income is reported. NC courier services don't require food licenses.</div>
-        <div class="risk-mitigation">NC LLC filing is $125 online. Business registration in progress. Ambassadors handle their own tax reporting as independent contractors.</div>
+        <div class="risk-desc">Pronto operates as a legitimate NC courier business. All income reported. No food license required for couriers in NC.</div>
+        <div class="risk-mit">NC LLC filing is $125 online. Business registration in progress. Ambassadors handle their own tax reporting.</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ── ORDER FORM ── -->
+<!-- ORDER -->
 <section id="order" class="section order-section">
   <div class="section-inner">
     <div class="reveal">
-      <div class="eyebrow">Place an Order</div>
-      <h2 class="section-h2">Let's eat.</h2>
-      <p class="section-p">Fill this out and expect a text confirmation within 5 minutes. Payment via Venmo at delivery.</p>
+      <div class="s-eyebrow">Place an Order</div>
+      <h2 class="s-h2">Let's eat.</h2>
+      <p class="s-p">Fill this out and expect a text confirmation within 5 minutes. Payment via Venmo at delivery.</p>
     </div>
     <div class="order-layout">
-      <div class="form-card reveal">
-        <form onsubmit="handleOrder(event)">
-          <div class="form-row">
-            <div class="form-group">
-              <label class="form-label">Name</label>
-              <input type="text" class="form-input" placeholder="First name" required>
+      <div class="form-wrap reveal">
+        <form action="https://formspree.io/f/YOUR_CODE" method="POST">
+          <input type="hidden" name="_subject" value="New Pronto Order">
+          <div class="form-row2">
+            <div class="fg">
+              <label class="fl">Name</label>
+              <input type="text" name="name" class="fi" placeholder="First name" required>
             </div>
-            <div class="form-group">
-              <label class="form-label">Phone Number</label>
-              <input type="tel" class="form-input" placeholder="(919) 000-0000" required>
+            <div class="fg">
+              <label class="fl">Phone Number</label>
+              <input type="tel" name="phone" class="fi" placeholder="(516) 000-0000" required>
             </div>
           </div>
-          <div class="form-row">
-            <div class="form-group">
-              <label class="form-label">Drop-off Location</label>
-              <select class="form-select" required>
+          <div class="form-row2">
+            <div class="fg">
+              <label class="fl">Drop-off Location</label>
+              <select name="location" class="fs" required>
                 <option value="" disabled selected>Select dorm</option>
                 <optgroup label="Zone A — included">
                   <option>Morrison Residence Hall</option>
@@ -1555,9 +1392,9 @@ footer {
                 </optgroup>
               </select>
             </div>
-            <div class="form-group">
-              <label class="form-label">Order Type</label>
-              <select class="form-select" required>
+            <div class="fg">
+              <label class="fl">Order Type</label>
+              <select name="order_type" class="fs" required>
                 <option value="" disabled selected>Select type</option>
                 <option>Solo — $4.99 delivery</option>
                 <option>Group — $6.99 flat (3+ people)</option>
@@ -1565,64 +1402,73 @@ footer {
               </select>
             </div>
           </div>
-          <div class="form-group">
-            <label class="form-label">Restaurant + Order</label>
-            <textarea class="form-textarea" placeholder="Restaurant name, then each item with customizations. For group orders, label each person's items separately." required></textarea>
-            <div class="form-hint">Check the menu online first — exact item names help us get it right on the first try.</div>
+          <div class="fg">
+            <label class="fl">Restaurant + Order</label>
+            <textarea name="order_details" class="fta" placeholder="Restaurant name, then each item with any customizations. For group orders, label each person's items separately." required></textarea>
+            <div class="fhint">Check the menu online first — exact item names help us get it right.</div>
           </div>
-          <div class="form-row">
-            <div class="form-group">
-              <label class="form-label">Venmo Handle</label>
-              <input type="text" class="form-input" placeholder="@yourvenmo" required>
-              <div class="form-hint">Charged at drop-off: food total + fees.</div>
+          <div class="form-row2">
+            <div class="fg">
+              <label class="fl">Venmo Handle</label>
+              <input type="text" name="venmo" class="fi" placeholder="@yourvenmo" required>
+              <div class="fhint">You'll be charged: food total + fees.</div>
             </div>
-            <div class="form-group">
-              <label class="form-label">Special Instructions</label>
-              <input type="text" class="form-input" placeholder="Allergies, extra sauce, buzz code…">
+            <div class="fg">
+              <label class="fl">Special Instructions</label>
+              <input type="text" name="notes" class="fi" placeholder="Allergies, extra sauce, gate code…">
             </div>
           </div>
-          <button type="submit" class="submit-btn">Submit Order Request</button>
+          <button type="submit" class="sub-btn">Submit Order Request</button>
         </form>
       </div>
 
-      <div class="order-sidebar reveal delay-1">
-        <div class="sidebar-card lime-accent">
+      <div class="order-side reveal d1">
+        <div class="sc blue-tint">
           <div class="sc-title">Current Status</div>
-          <div class="sc-body" id="sidebarStatus">Checking hours…</div>
+          <div class="sc-body" id="sideStatus">Checking hours…</div>
         </div>
-        <div class="sidebar-card">
+        <div class="sc">
           <div class="sc-title">Payment</div>
-          <div class="sc-body">All payments via Venmo. You'll get a total before we place your order. Pay at drop-off or send early — your choice.
-            <span class="venmo-chip">@runr-unc</span>
+          <div class="sc-body">
+            All payments via Venmo. You'll get a total before we place your order.<br>
+            <span class="venmo-tag">@ryanguzman1</span>
           </div>
         </div>
-        <div class="sidebar-card">
-          <div class="sc-title">Tracking</div>
-          <div class="sc-body">We text at three points: order confirmed, food picked up, and outside your building. Save the number after your first order.</div>
+        <div class="sc">
+          <div class="sc-title">Order Tracking</div>
+          <div class="sc-body">We text at three points: order confirmed, food picked up, and when we're at your building. Save the number after your first confirmation.</div>
         </div>
-        <div class="sidebar-card">
+        <div class="sc">
           <div class="sc-title">Cancellations</div>
           <div class="sc-body">Cancel within 5 minutes at no charge. Once we've placed the restaurant order, the food cost may apply. Text us — we're flexible.</div>
         </div>
-        <div class="sidebar-card">
-          <div class="sc-title">Questions</div>
-          <div class="sc-body"><strong>Instagram:</strong> @runr.unc<br><strong>Email:</strong> runrdelivery@gmail.com</div>
+        <div class="sc">
+          <div class="sc-title">Contact</div>
+          <div class="sc-body">
+            <strong>Text/call:</strong> (516) 320-1570<br>
+            <strong>Instagram:</strong> <a href="https://instagram.com/ryanguzman._" target="_blank">@ryanguzman._</a><br>
+            <strong>Email:</strong> <a href="mailto:rguzm@unc.edu">rguzm@unc.edu</a>
+          </div>
+        </div>
+        <div class="sc">
+          <div class="sc-title">Liability Note</div>
+          <div class="sc-body" style="font-size:0.76rem;">Pronto is a courier service only. Food is prepared entirely by the listed restaurant. By submitting an order you acknowledge this.</div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ── FOOTER ── -->
+<!-- FOOTER -->
 <footer>
-  <div class="footer-inner">
+  <div class="foot-inner">
     <div>
-      <div class="footer-logo-name">Rünr<span>.</span></div>
-      <div class="footer-tagline">Campus delivery for Tar Heels. No markup. No surge. Just your food at your door.</div>
+      <div class="foot-logo">Pronto</div>
+      <div class="foot-tag">Campus delivery for Tar Heels. No markup, no surge, no nonsense.</div>
     </div>
     <div>
-      <div class="footer-col-label">Navigate</div>
-      <ul class="footer-links">
+      <div class="foot-col-label">Navigate</div>
+      <ul class="foot-links">
         <li><a href="#how">How It Works</a></li>
         <li><a href="#pricing">Pricing</a></li>
         <li><a href="#hours">Hours</a></li>
@@ -1631,101 +1477,80 @@ footer {
       </ul>
     </div>
     <div>
-      <div class="footer-col-label">Contact</div>
-      <ul class="footer-links">
-        <li><a href="mailto:runrdelivery@gmail.com">runrdelivery@gmail.com</a></li>
-        <li><a href="#">Instagram: @runr.unc</a></li>
+      <div class="foot-col-label">Contact</div>
+      <ul class="foot-links">
+        <li><a href="mailto:rguzm@unc.edu">rguzm@unc.edu</a></li>
+        <li><a href="https://instagram.com/ryanguzman._" target="_blank">@ryanguzman._</a></li>
+        <li><a href="tel:5163201570">(516) 320-1570</a></li>
         <li><a href="#order">Place an Order</a></li>
       </ul>
     </div>
     <div>
-      <div class="footer-col-label">Program</div>
-      <ul class="footer-links">
-        <li><a href="mailto:runrdelivery@gmail.com?subject=Ambassador Application">Become an Ambassador</a></li>
-        <li><a href="#risks">Transparency</a></li>
+      <div class="foot-col-label">Program</div>
+      <ul class="foot-links">
+        <li><a href="mailto:rguzm@unc.edu?subject=Ambassador Application">Become an Ambassador</a></li>
         <li><a href="#pricing">Compare vs DoorDash</a></li>
+        <li><a href="#risks">Transparency</a></li>
       </ul>
     </div>
   </div>
-  <div class="footer-bottom">
-    <div class="footer-disclaimer">Rünr is an independent courier service and is not affiliated with, endorsed by, or sponsored by the University of North Carolina at Chapel Hill, DoorDash, Uber Eats, or any restaurant. Rünr does not prepare, store, or alter food. All food is ordered from and prepared by licensed third-party restaurants. Ambassadors are independent contractors. Earnings estimates are illustrative only and not guaranteed.</div>
-    <div class="footer-copy">© 2025 Rünr</div>
+  <div class="foot-bottom">
+    <div class="foot-disclaimer">Pronto is an independent courier service and is not affiliated with, endorsed by, or sponsored by the University of North Carolina at Chapel Hill, DoorDash, Uber Eats, or any restaurant. Pronto does not prepare, store, or alter food. All food is ordered from and prepared by licensed third-party restaurants. Ambassadors are independent contractors. Earnings estimates are illustrative and not guaranteed.</div>
+    <div class="foot-copy">© 2025 Pronto</div>
   </div>
 </footer>
 
-<!-- ── TOAST ── -->
-<div id="toast">Order submitted — expect a text within 5 minutes.</div>
+<div id="toast">Order submitted — you'll get a text within 5 minutes.</div>
 
 <script>
-/* ── STATUS ── */
 function getStatus() {
   const now = new Date();
-  const day = now.getDay();
-  const h   = now.getHours();
-  const t   = h + now.getMinutes() / 60;
-  let open  = false;
-  if ((day === 2 || day === 3) && t >= 21 && t < 24) open = true;
-  if (day === 4 && t >= 21) open = true;
-  if (day === 5 && h < 1) open = true;
-  if ((day === 5 || day === 6) && t >= 21) open = true;
-  if ((day === 0 || day === 6) && h < 2) open = true;
-  const dayNames = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-  const openDays = [2,3,4,5,6];
-  let nextOpen = '';
-  if (!open) {
-    for (let i = 1; i <= 7; i++) {
-      const d = (day + i) % 7;
-      if (openDays.includes(d)) { nextOpen = dayNames[d]; break; }
-    }
-  }
-  return { open, nextOpen };
+  const day = now.getDay(), h = now.getHours(), t = h + now.getMinutes()/60;
+  let open = false;
+  if ((day===2||day===3) && t>=21 && t<24) open=true;
+  if (day===4 && t>=21) open=true;
+  if (day===5 && h<1) open=true;
+  if ((day===5||day===6) && t>=21) open=true;
+  if ((day===0||day===6) && h<2) open=true;
+  const days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  const openDays=[2,3,4,5,6];
+  let next='';
+  if(!open){for(let i=1;i<=7;i++){const d=(day+i)%7;if(openDays.includes(d)){next=days[d];break;}}}
+  return {open,next};
 }
 
-function updateStatus() {
-  const { open, nextOpen } = getStatus();
-  const dot  = document.getElementById('statusDot');
-  const text = document.getElementById('statusText');
-  const card = document.getElementById('currentStatusCard');
-  const side = document.getElementById('sidebarStatus');
-
-  if (open) {
-    dot.className = 'open';
-    text.textContent = 'Open now';
-    const msg = '<strong style="color:var(--lime)">Open now.</strong> Submit your order and expect a confirmation text within 5 minutes.';
-    if(card) card.innerHTML = msg;
-    if(side) side.innerHTML = msg;
+function updateStatus(){
+  const {open,next}=getStatus();
+  const dot=document.getElementById('statusDot');
+  const txt=document.getElementById('statusText');
+  const card=document.getElementById('statusCard');
+  const side=document.getElementById('sideStatus');
+  if(open){
+    dot.className='sdot open';
+    txt.textContent='Open now';
+    const m='<strong style="color:var(--green)">Open now.</strong> Submit your order and expect a text within 5 minutes.';
+    if(card) card.innerHTML=m;
+    if(side) side.innerHTML=m;
   } else {
-    dot.className = 'closed';
-    text.textContent = 'Closed · Opens ' + nextOpen;
-    const msg = '<strong style="color:var(--red)">Currently closed.</strong> We open ' + nextOpen + ' at 9PM. Tue–Wed 9PM–12AM, Thu 9PM–1AM, Fri–Sat 9PM–2AM.';
-    if(card) card.innerHTML = msg;
-    if(side) side.innerHTML = msg;
+    dot.className='sdot closed';
+    txt.textContent='Closed · Opens '+next;
+    const m='<strong style="color:var(--red)">Currently closed.</strong> We open '+next+' at 9PM. Tue–Wed 9PM–12AM · Thu 9PM–1AM · Fri–Sat 9PM–2AM.';
+    if(card) card.innerHTML=m;
+    if(side) side.innerHTML=m;
   }
 }
 updateStatus();
-setInterval(updateStatus, 30000);
+setInterval(updateStatus,30000);
 
-/* ── FORM ── */
-function handleOrder(e) {
-  e.preventDefault();
-  const t = document.getElementById('toast');
-  t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 4500);
-  e.target.reset();
-}
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});
+},{threshold:0.07});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 
-/* ── SCROLL REVEAL ── */
-const obs = new IntersectionObserver((entries) => {
-  entries.forEach(en => { if (en.isIntersecting) en.target.classList.add('visible'); });
-}, { threshold: 0.07 });
-document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
-
-/* ── SMOOTH SCROLL ── */
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-  a.addEventListener('click', e => {
-    const id = a.getAttribute('href');
-    const tgt = document.querySelector(id);
-    if (tgt) { e.preventDefault(); tgt.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const t=document.querySelector(a.getAttribute('href'));
+    if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'});}
   });
 });
 </script>
