@@ -3,1550 +3,454 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pronto — Campus Delivery for UNC</title>
+<title>PRONTO — CAMPUS DELIVERY</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;500;600;700;800&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-
 :root {
-  --bg:       #FAFAFA;
-  --bg-1:     #FFFFFF;
-  --bg-2:     #F5F5F7;
-  --bg-3:     #EBEBED;
-  --border:   rgba(0,0,0,0.08);
-  --border-2: rgba(0,0,0,0.14);
-  --ink:      #1D1D1F;
-  --ink-2:    #6E6E73;
-  --ink-3:    #AEAEB2;
-  --accent:   #1D1D1F;
-  --blue:     #2563FF;
-  --blue-lt:  rgba(37,99,255,0.09);
-  --green:    #1A8917;
-  --red:      #FF3B30;
-  --r:        16px;
-  --r-sm:     10px;
-  --r-xs:     6px;
-  --shadow:   0 2px 12px rgba(0,0,0,0.06), 0 1px 3px rgba(0,0,0,0.04);
-  --shadow-lg:0 12px 40px rgba(0,0,0,0.1), 0 4px 12px rgba(0,0,0,0.06);
-}
-
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body {
-  background: var(--bg);
-  color: var(--ink);
-  font-family: 'Inter', -apple-system, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
-}
-
-/* ── NAV ── */
-nav {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 900;
-  height: 52px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 2rem;
-  background: rgba(250,250,250,0.85);
-  backdrop-filter: blur(24px) saturate(200%);
-  -webkit-backdrop-filter: blur(24px) saturate(200%);
-  border-bottom: 1px solid var(--border);
-}
-
-.logo {
-  font-size: 1.1rem;
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  color: var(--ink);
-  text-decoration: none;
-}
-
-.nav-links {
-  display: flex;
-  gap: 2rem;
-  list-style: none;
-}
-.nav-links a {
-  font-size: 0.8rem;
-  font-weight: 500;
-  color: var(--ink-2);
-  text-decoration: none;
-  transition: color 0.15s;
-}
-.nav-links a:hover { color: var(--ink); }
-
-.nav-right {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.status-tag {
-  display: flex;
-  align-items: center;
-  gap: 0.35rem;
-  font-size: 0.72rem;
-  font-weight: 500;
-  color: var(--ink-3);
-}
-.sdot {
-  width: 6px; height: 6px;
-  border-radius: 50%;
-  background: var(--ink-3);
-  flex-shrink: 0;
-}
-.sdot.open  { background: var(--green); animation: blink 2s ease infinite; }
-.sdot.closed{ background: var(--red); }
-@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.4} }
-
-.btn-cta {
-  font-size: 0.82rem;
-  font-weight: 600;
-  color: #fff;
-  background: #2563FF;
-  border: none;
-  padding: 0.45rem 1.1rem;
-  border-radius: 100px;
-  cursor: pointer;
-  text-decoration: none;
-  display: inline-block;
-  transition: all 0.18s;
-  letter-spacing: -0.01em;
-}
-.btn-cta:hover { background: #1d52e8; transform: translateY(-1px); }
-
-@media (max-width: 700px) {
-  .nav-links { display: none; }
-  nav { padding: 0 1.25rem; }
-}
-
-/* ── HERO ── */
-.hero {
-  min-height: 100svh;
-  padding-top: 52px;
-  display: flex;
-  flex-direction: column;
-  background: var(--bg-1);
-  position: relative;
-  overflow: hidden;
-}
-
-.hero-bg-blur {
-  position: absolute;
-  width: 800px; height: 800px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(37,99,255,0.07) 0%, transparent 65%);
-  top: -200px; right: -200px;
-  pointer-events: none;
-}
-
-.hero-content {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 5rem 2rem 3rem;
-  max-width: 900px;
-  margin: 0 auto;
-  width: 100%;
-  position: relative;
-  z-index: 2;
-}
-
-.hero-label {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.3rem 0.85rem;
-  background: var(--bg-2);
-  border: 1px solid var(--border);
-  border-radius: 100px;
-  font-size: 0.75rem;
-  font-weight: 500;
-  color: var(--ink-2);
-  margin-bottom: 2rem;
-  animation: fadeUp 0.5s ease both;
-}
-.label-dot {
-  width: 5px; height: 5px;
-  background: var(--blue);
-  border-radius: 50%;
-}
-
-.hero-h1 {
-  font-size: clamp(3rem, 8vw, 6.5rem);
-  font-weight: 800;
-  letter-spacing: -0.04em;
-  line-height: 1.0;
-  color: var(--ink);
-  margin-bottom: 1.5rem;
-  animation: fadeUp 0.5s ease 0.07s both;
-}
-.hero-h1 .muted { color: var(--ink-3); font-weight: 300; }
-
-.hero-p {
-  font-size: clamp(0.95rem, 2vw, 1.15rem);
-  font-weight: 400;
-  color: var(--ink-2);
-  line-height: 1.65;
-  max-width: 500px;
-  margin-bottom: 2.25rem;
-  animation: fadeUp 0.5s ease 0.12s both;
-}
-
-.hero-btns {
-  display: flex;
-  gap: 0.75rem;
-  justify-content: center;
-  flex-wrap: wrap;
-  animation: fadeUp 0.5s ease 0.17s both;
-}
-
-.btn-primary {
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: #fff;
-  background: #2563FF;
-  border: none;
-  padding: 0.8rem 1.75rem;
-  border-radius: 100px;
-  cursor: pointer;
-  text-decoration: none;
-  display: inline-block;
-  transition: all 0.18s;
-  letter-spacing: -0.01em;
-}
-.btn-primary:hover { background: #1d52e8; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(37,99,255,0.35); }
-
-.btn-secondary {
-  font-size: 0.9rem;
-  font-weight: 500;
-  color: var(--ink);
-  background: transparent;
-  border: 1px solid var(--border-2);
-  padding: 0.8rem 1.75rem;
-  border-radius: 100px;
-  cursor: pointer;
-  text-decoration: none;
-  display: inline-block;
-  transition: all 0.18s;
-}
-.btn-secondary:hover { background: var(--bg-2); }
-
-/* metrics */
-.hero-metrics {
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(4,1fr);
-  border-top: 1px solid var(--border);
-  background: var(--bg-1);
-  position: relative;
-  z-index: 2;
-}
-.hm {
-  padding: 1.5rem 2rem;
-  border-right: 1px solid var(--border);
-  text-align: center;
-}
-.hm:last-child { border-right: none; }
-.hm-val {
-  font-size: 1.75rem;
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  color: var(--ink);
-  margin-bottom: 0.2rem;
-}
-.hm-label {
-  font-size: 0.75rem;
-  font-weight: 400;
-  color: var(--ink-3);
-}
-@media (max-width: 600px) {
-  .hero-metrics { grid-template-columns: 1fr 1fr; }
-  .hm:nth-child(2) { border-right: none; }
-  .hm:nth-child(1), .hm:nth-child(2) { border-bottom: 1px solid var(--border); }
-}
-
-/* ── TICKER ── */
-.ticker {
-  background: #2563FF;
-  height: 34px;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-}
-.ticker-track {
-  display: flex;
-  white-space: nowrap;
-  animation: scroll-ticker 24s linear infinite;
-}
-.t-item {
-  font-size: 0.7rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.55);
-  padding: 0 2.5rem;
-  display: flex;
-  align-items: center;
-  gap: 2.5rem;
-}
-.t-item::after { content: '·'; opacity: 0.4; }
-@keyframes scroll-ticker { from{transform:translateX(0)} to{transform:translateX(-50%)} }
-
-/* ── SECTIONS ── */
-.section { padding: 6rem 2rem; }
-.section-inner { max-width: 1040px; margin: 0 auto; }
-
-.s-eyebrow {
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--ink-3);
-  margin-bottom: 0.6rem;
-}
-
-.s-h2 {
-  font-size: clamp(1.9rem, 4vw, 3rem);
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  line-height: 1.1;
-  color: var(--ink);
-  margin-bottom: 0.85rem;
-}
-
-.s-p {
-  font-size: 1rem;
-  font-weight: 400;
-  color: var(--ink-2);
-  line-height: 1.65;
-  max-width: 440px;
-}
-
-/* ── HOW ── */
-.how-section { background: var(--bg-2); }
-
-.how-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  flex-wrap: wrap;
-  gap: 2rem;
-  margin-bottom: 2.5rem;
-}
-
-.steps {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1px;
-  background: var(--border);
-  border-radius: var(--r);
-  overflow: hidden;
-  box-shadow: var(--shadow);
-}
-.step {
-  background: var(--bg-1);
-  padding: 2rem 1.75rem;
-  transition: background 0.15s;
-}
-.step:hover { background: #FEFEFE; }
-
-.step-n {
-  font-size: 0.68rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--ink-3);
-  margin-bottom: 1rem;
-}
-.step-title {
-  font-size: 0.975rem;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  color: var(--ink);
-  margin-bottom: 0.5rem;
-}
-.step-desc {
-  font-size: 0.845rem;
-  font-weight: 400;
-  color: var(--ink-2);
-  line-height: 1.6;
-}
-@media (max-width: 860px) { .steps { grid-template-columns: 1fr 1fr; } }
-@media (max-width: 480px) { .steps { grid-template-columns: 1fr; } }
-
-.info-strip {
-  margin-top: 1.25rem;
-  padding: 1.25rem 1.5rem;
-  background: var(--blue-lt);
-  border-radius: var(--r-sm);
-  border: 1px solid rgba(37,99,255,0.16);
-  display: flex;
-  gap: 1rem;
-  align-items: flex-start;
-}
-.strip-tag {
-  font-size: 0.68rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--blue);
-  white-space: nowrap;
-  padding-top: 0.1rem;
-}
-.strip-text {
-  font-size: 0.865rem;
-  font-weight: 400;
-  color: var(--ink-2);
-  line-height: 1.6;
-}
-
-/* ── PRICING ── */
-.pricing-section { background: var(--bg-1); }
-
-.price-cards {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
-  margin-top: 2.5rem;
-}
-@media (max-width: 760px) { .price-cards { grid-template-columns: 1fr; } }
-
-.pc {
-  background: var(--bg-2);
-  border: 1px solid var(--border);
-  border-radius: var(--r);
-  padding: 1.75rem;
-  position: relative;
-  transition: all 0.2s;
-}
-.pc:hover { box-shadow: var(--shadow-lg); transform: translateY(-2px); }
-.pc.featured {
-  background: #2563FF;
-  border-color: transparent;
-}
-.pc.featured:hover { box-shadow: 0 16px 48px rgba(37,99,255,0.35); }
-
-.pc-tag {
-  position: absolute;
-  top: -10px; left: 1.5rem;
-  font-size: 0.65rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  background: var(--blue);
-  color: #fff;
-  padding: 0.2rem 0.65rem;
-  border-radius: 100px;
-}
-.pc-type {
-  font-size: 0.975rem;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  color: var(--ink);
-  margin-bottom: 0.2rem;
-}
-.pc.featured .pc-type { color: #fff; }
-.pc-sub {
-  font-size: 0.78rem;
-  font-weight: 400;
-  color: var(--ink-3);
-  margin-bottom: 1.5rem;
-}
-.pc.featured .pc-sub { color: rgba(255,255,255,0.5); }
-.pc-price {
-  font-size: 3rem;
-  font-weight: 700;
-  letter-spacing: -0.04em;
-  color: var(--ink);
-  line-height: 1;
-  margin-bottom: 0.2rem;
-}
-.pc.featured .pc-price { color: #fff; }
-.pc-unit {
-  font-size: 0.78rem;
-  font-weight: 400;
-  color: var(--ink-3);
-  margin-bottom: 1.5rem;
-}
-.pc.featured .pc-unit { color: rgba(255,255,255,0.45); }
-.pc-list {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-.pc-list li {
-  font-size: 0.845rem;
-  font-weight: 400;
-  color: var(--ink-2);
-  display: flex;
-  gap: 0.6rem;
-  align-items: flex-start;
-  line-height: 1.45;
-}
-.pc.featured .pc-list li { color: rgba(255,255,255,0.65); }
-.pc-list li::before {
-  content: '';
-  width: 4px; height: 4px;
-  background: var(--ink-3);
-  border-radius: 50%;
-  flex-shrink: 0;
-  margin-top: 0.5rem;
-}
-.pc.featured .pc-list li::before { background: rgba(255,255,255,0.3); }
-
-/* compare */
-.compare {
-  margin-top: 1.75rem;
-  border-radius: var(--r-sm);
-  overflow: hidden;
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow);
-}
-.compare-hd {
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
-  padding: 0.8rem 1.25rem;
-  background: var(--bg-2);
-  border-bottom: 1px solid var(--border);
-}
-.compare-hd span {
-  font-size: 0.68rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: var(--ink-3);
-}
-.compare-hd .us { color: var(--ink); }
-.compare-r {
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
-  padding: 0.8rem 1.25rem;
-  border-bottom: 1px solid var(--border);
-  background: var(--bg-1);
-  transition: background 0.12s;
-  align-items: center;
-}
-.compare-r:last-child { border-bottom: none; }
-.compare-r:hover { background: var(--bg-2); }
-.compare-r.hl { background: rgba(26,137,23,0.04); }
-.cd { font-size: 0.845rem; font-weight: 400; color: var(--ink-2); }
-.cd.strong { color: var(--ink); font-weight: 600; }
-.ct { font-size: 0.8rem; font-weight: 500; color: var(--red); }
-.cu { font-size: 0.8rem; font-weight: 600; color: var(--green); }
-.cu.big { font-size: 0.875rem; }
-
-/* ── HOURS ── */
-.hours-section { background: var(--bg-2); }
-
-.hours-layout {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2.5rem;
-  margin-top: 2.5rem;
-}
-@media (max-width: 680px) { .hours-layout { grid-template-columns: 1fr; } }
-
-.day-list {
-  background: var(--bg-1);
-  border-radius: var(--r);
-  border: 1px solid var(--border);
-  overflow: hidden;
-  box-shadow: var(--shadow);
-}
-.day-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 1.5rem;
-  border-bottom: 1px solid var(--border);
-  transition: background 0.12s;
-}
-.day-row:last-child { border-bottom: none; }
-.day-row.active:hover { background: var(--bg-2); }
-.day-row.closed { opacity: 0.35; }
-.dr-name {
-  font-size: 0.9rem;
-  font-weight: 500;
-  color: var(--ink);
-}
-.dr-time {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.845rem;
-  font-weight: 500;
-  color: var(--ink-2);
-}
-.peak-chip {
-  font-size: 0.62rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: #fff;
-  background: var(--ink);
-  padding: 0.15rem 0.45rem;
-  border-radius: 100px;
-}
-
-.hours-notes {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-.hn {
-  background: var(--bg-1);
-  border: 1px solid var(--border);
-  border-radius: var(--r-sm);
-  padding: 1.1rem 1.25rem;
-  box-shadow: var(--shadow);
-}
-.hn.highlight { border-color: rgba(37,99,255,0.22); background: var(--blue-lt); }
-.hn-title {
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: var(--ink);
-  margin-bottom: 0.35rem;
-  letter-spacing: -0.01em;
-}
-.hn-body {
-  font-size: 0.82rem;
-  font-weight: 400;
-  color: var(--ink-2);
-  line-height: 1.6;
-}
-
-/* ── AMBASSADOR ── */
-.amb-section { background: var(--bg-1); }
-
-.amb-layout {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 3.5rem;
-  margin-top: 2.5rem;
-  align-items: start;
-}
-@media (max-width: 760px) { .amb-layout { grid-template-columns: 1fr; } }
-
-.perk-list {
-  display: flex;
-  flex-direction: column;
-  gap: 1px;
-  background: var(--border);
-  border-radius: var(--r);
-  overflow: hidden;
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow);
-}
-.perk {
-  display: flex;
-  gap: 1rem;
-  padding: 1.35rem 1.5rem;
-  background: var(--bg-1);
-  transition: background 0.12s;
-  align-items: flex-start;
-}
-.perk:hover { background: var(--bg-2); }
-
-.perk-num {
-  font-size: 0.72rem;
-  font-weight: 700;
-  color: var(--ink-3);
-  min-width: 20px;
-  padding-top: 0.15rem;
-}
-.perk-title {
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--ink);
-  margin-bottom: 0.3rem;
-  letter-spacing: -0.01em;
-}
-.perk-desc {
-  font-size: 0.825rem;
-  font-weight: 400;
-  color: var(--ink-2);
-  line-height: 1.6;
-}
-
-.apply-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  margin-top: 1.25rem;
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: #fff;
-  background: var(--ink);
-  border: none;
-  padding: 0.75rem 1.5rem;
-  border-radius: 100px;
-  cursor: pointer;
-  text-decoration: none;
-  transition: all 0.18s;
-  letter-spacing: -0.01em;
-}
-.apply-btn:hover { background: #1d52e8; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(37,99,255,0.35); }
-
-.earn-card {
-  background: var(--bg-2);
-  border: 1px solid var(--border);
-  border-radius: var(--r);
-  overflow: hidden;
-  box-shadow: var(--shadow);
-  position: sticky;
-  top: 70px;
-}
-.ec-head {
-  padding: 1.25rem 1.5rem;
-  background: var(--bg-1);
-  border-bottom: 1px solid var(--border);
-}
-.ec-head-title {
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--ink);
-  letter-spacing: -0.01em;
-  margin-bottom: 0.1rem;
-}
-.ec-head-sub { font-size: 0.75rem; font-weight: 400; color: var(--ink-3); }
-
-.ec-row {
-  display: flex;
-  justify-content: space-between;
-  padding: 0.85rem 1.5rem;
-  border-bottom: 1px solid var(--border);
-  background: var(--bg-1);
-}
-.ec-row:last-of-type { border-bottom: none; }
-.ec-label { font-size: 0.82rem; font-weight: 400; color: var(--ink-2); }
-.ec-val   { font-size: 0.82rem; font-weight: 600; color: var(--ink); }
-.ec-val.g { color: var(--green); }
-
-.ec-total {
-  padding: 1.5rem;
-  background: #2563FF;
-  text-align: center;
-}
-.ec-total-label {
-  font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.45);
-  margin-bottom: 0.35rem;
-}
-.ec-total-num {
-  font-size: 3.5rem;
-  font-weight: 700;
-  letter-spacing: -0.04em;
-  color: #fff;
-  line-height: 1;
-}
-.ec-total-sub {
-  font-size: 0.75rem;
-  font-weight: 400;
-  color: rgba(255,255,255,0.4);
-  margin-top: 0.3rem;
-}
-.ec-note {
-  padding: 0.85rem 1.5rem;
-  background: var(--bg-2);
-  border-top: 1px solid var(--border);
-  font-size: 0.72rem;
-  font-weight: 400;
-  color: var(--ink-3);
-  line-height: 1.55;
-}
-
-/* ── RISKS ── */
-.risks-section { background: var(--bg-2); }
-
-.risk-grid {
-  display: grid;
-  grid-template-columns: repeat(3,1fr);
-  gap: 1rem;
-  margin-top: 2.5rem;
-}
-@media (max-width: 760px) { .risk-grid { grid-template-columns: 1fr 1fr; } }
-@media (max-width: 480px) { .risk-grid { grid-template-columns: 1fr; } }
-
-.risk {
-  background: var(--bg-1);
-  border: 1px solid var(--border);
-  border-radius: var(--r-sm);
-  padding: 1.5rem;
-  box-shadow: var(--shadow);
-  transition: all 0.15s;
-}
-.risk:hover { box-shadow: var(--shadow-lg); transform: translateY(-2px); }
-
-.risk-badge {
-  display: inline-block;
-  font-size: 0.62rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  padding: 0.18rem 0.55rem;
-  border-radius: 100px;
-  margin-bottom: 0.85rem;
-}
-.rb-low { background: rgba(26,137,23,0.08); color: var(--green); }
-.rb-med { background: rgba(37,99,255,0.09); color: var(--blue); }
-
-.risk-title {
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--ink);
-  margin-bottom: 0.4rem;
-  letter-spacing: -0.01em;
-}
-.risk-desc { font-size: 0.8rem; font-weight: 400; color: var(--ink-2); line-height: 1.6; margin-bottom: 0.55rem; }
-.risk-mit  { font-size: 0.76rem; font-weight: 400; color: var(--ink-3); line-height: 1.55; font-style: italic; }
-
-/* ── ORDER ── */
-.order-section { background: var(--bg-1); }
-
-.order-layout {
-  display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
-  gap: 3rem;
-  margin-top: 2.5rem;
-  align-items: start;
-}
-@media (max-width: 760px) { .order-layout { grid-template-columns: 1fr; } }
-
-.form-wrap {
-  background: var(--bg-2);
-  border: 1px solid var(--border);
-  border-radius: var(--r);
-  padding: 2rem;
-  box-shadow: var(--shadow);
-}
-
-.fg { margin-bottom: 1.1rem; }
-.fl {
-  display: block;
-  font-size: 0.72rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: var(--ink-2);
-  margin-bottom: 0.4rem;
-}
-.fi, .fs, .fta {
-  width: 100%;
-  background: var(--bg-1);
-  border: 1px solid var(--border);
-  border-radius: var(--r-xs);
-  padding: 0.75rem 0.9rem;
-  font-family: 'Inter', sans-serif;
-  font-size: 0.875rem;
-  font-weight: 400;
-  color: var(--ink);
-  outline: none;
-  transition: border-color 0.15s, box-shadow 0.15s;
-  appearance: none;
-  -webkit-appearance: none;
-}
-.fi:focus, .fs:focus, .fta:focus {
-  border-color: rgba(37,99,255,0.45);
-  box-shadow: 0 0 0 3px rgba(37,99,255,0.08);
-}
-.fi::placeholder, .fta::placeholder { color: var(--ink-3); }
-.fta { resize: vertical; min-height: 100px; }
-.fs option { background: #fff; }
-.fhint {
-  font-size: 0.72rem;
-  font-weight: 400;
-  color: var(--ink-3);
-  margin-top: 0.3rem;
-  line-height: 1.5;
-}
-.form-row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem; }
-@media (max-width: 480px) { .form-row2 { grid-template-columns: 1fr; } }
-
-.sub-btn {
-  width: 100%;
-  background: #2563FF;
-  color: #fff;
-  border: none;
-  border-radius: 100px;
-  padding: 0.9rem;
-  font-family: 'Inter', sans-serif;
-  font-size: 0.9rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.18s;
-  margin-top: 0.25rem;
-  letter-spacing: -0.01em;
-}
-.sub-btn:hover { background: #1d52e8; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(37,99,255,0.35); }
-
-.order-side { display: flex; flex-direction: column; gap: 0.75rem; position: sticky; top: 70px; }
-
-.sc {
-  background: var(--bg-1);
-  border: 1px solid var(--border);
-  border-radius: var(--r-sm);
-  padding: 1.1rem 1.25rem;
-  box-shadow: var(--shadow);
-}
-.sc.blue-tint { border-color: rgba(37,99,255,0.2); background: var(--blue-lt); }
-.sc-title {
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: var(--ink);
-  margin-bottom: 0.35rem;
-  letter-spacing: -0.01em;
-}
-.sc-body {
-  font-size: 0.82rem;
-  font-weight: 400;
-  color: var(--ink-2);
-  line-height: 1.6;
-}
-.sc-body strong { color: var(--ink); font-weight: 600; }
-.sc-body a { color: var(--blue); text-decoration: none; }
-.sc-body a:hover { text-decoration: underline; }
-
-.venmo-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.3rem;
-  margin-top: 0.45rem;
-  padding: 0.25rem 0.65rem;
-  background: rgba(0,104,255,0.08);
-  border: 1px solid rgba(0,104,255,0.18);
-  border-radius: var(--r-xs);
-  font-size: 0.78rem;
-  font-weight: 600;
-  color: #0068FF;
-  font-family: 'Inter', sans-serif;
-}
-
-/* ── FOOTER ── */
-footer {
-  background: var(--bg-2);
-  border-top: 1px solid var(--border);
-  padding: 4rem 2rem 2.5rem;
-}
-.foot-inner {
-  max-width: 1040px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1.5fr 1fr 1fr 1fr;
-  gap: 3rem;
-  padding-bottom: 2.5rem;
-  border-bottom: 1px solid var(--border);
-}
-@media (max-width: 760px) { .foot-inner { grid-template-columns: 1fr 1fr; } }
-@media (max-width: 480px) { .foot-inner { grid-template-columns: 1fr; } }
-
-.foot-logo { font-size: 1.1rem; font-weight: 700; letter-spacing: -0.03em; color: var(--ink); margin-bottom: 0.45rem; }
-.foot-tag  { font-size: 0.82rem; font-weight: 400; color: var(--ink-3); line-height: 1.6; max-width: 220px; }
-
-.foot-col-label {
-  font-size: 0.68rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--ink-3);
-  margin-bottom: 0.85rem;
-}
-.foot-links { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
-.foot-links a { font-size: 0.845rem; font-weight: 400; color: var(--ink-2); text-decoration: none; transition: color 0.12s; }
-.foot-links a:hover { color: var(--ink); }
-
-.foot-bottom {
-  max-width: 1040px;
-  margin: 2rem auto 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 2rem;
-  flex-wrap: wrap;
-}
-.foot-disclaimer {
-  font-size: 0.7rem;
-  font-weight: 400;
-  color: var(--ink-3);
-  line-height: 1.65;
-  max-width: 640px;
-}
-.foot-copy { font-size: 0.75rem; font-weight: 400; color: var(--ink-3); white-space: nowrap; }
-
-/* ── TOAST ── */
-#toast {
-  position: fixed;
-  bottom: 2rem;
-  left: 50%;
-  transform: translateX(-50%) translateY(80px);
-  background: #2563FF;
-  color: #fff;
-  padding: 0.85rem 1.75rem;
-  border-radius: 100px;
-  font-size: 0.845rem;
-  font-weight: 500;
-  z-index: 9999;
-  transition: transform 0.4s cubic-bezier(.34,1.56,.64,1);
-  white-space: nowrap;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.2);
-  letter-spacing: -0.01em;
-}
-#toast.show { transform: translateX(-50%) translateY(0); }
-
-/* ── ANIMATIONS ── */
-@keyframes fadeUp {
-  from { opacity:0; transform:translateY(14px); }
-  to   { opacity:1; transform:translateY(0); }
-}
-.reveal {
-  opacity: 0;
-  transform: translateY(16px);
-  transition: opacity 0.5s cubic-bezier(.22,1,.36,1), transform 0.5s cubic-bezier(.22,1,.36,1);
-}
-.reveal.d1 { transition-delay: 0.07s; }
-.reveal.d2 { transition-delay: 0.14s; }
-.reveal.visible { opacity:1; transform:translateY(0); }
-
+  --red:#E8002D;--red-dim:rgba(232,0,45,0.1);--red-glow:rgba(232,0,45,0.2);
+  --black:#000000;--bg:#080808;--bg-1:#0D0D0D;--bg-2:#111111;--bg-3:#181818;
+  --border:rgba(255,255,255,0.07);--border-2:rgba(255,255,255,0.13);
+  --white:#FFFFFF;--t1:#F0F0F0;--t2:rgba(255,255,255,0.45);--t3:rgba(255,255,255,0.2);--r:4px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--t1);font-family:'Barlow Condensed',sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+nav{position:fixed;top:0;left:0;right:0;z-index:900;height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 2rem;background:rgba(8,8,8,0.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:0.1em;color:var(--white);text-decoration:none;}
+.nav-logo .dot{color:var(--red);}
+.nav-links{display:flex;gap:0.15rem;list-style:none;}
+.nav-links a{font-family:'Barlow Condensed',sans-serif;font-size:0.78rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--t3);text-decoration:none;padding:0.35rem 0.85rem;transition:color 0.15s;}
+.nav-links a:hover{color:var(--white);}
+.nav-right{display:flex;align-items:center;gap:1rem;}
+.status-chip{display:flex;align-items:center;gap:0.4rem;font-family:'Barlow Condensed',sans-serif;font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--t3);}
+.sdot{width:6px;height:6px;border-radius:50%;background:var(--t3);flex-shrink:0;}
+.sdot.open{background:#00E676;box-shadow:0 0 8px rgba(0,230,118,0.5);animation:blink 2s ease infinite;}
+.sdot.closed{background:var(--red);}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
+.btn-nav{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:0.12em;color:var(--black);background:var(--red);border:none;padding:0.45rem 1.4rem 0.35rem;cursor:pointer;text-decoration:none;display:inline-block;transition:all 0.15s;}
+.btn-nav:hover{background:#ff0033;transform:translateY(-1px);}
+@media(max-width:700px){.nav-links{display:none;}nav{padding:0 1.25rem;}}
+.hero{min-height:100svh;padding-top:56px;background:var(--black);display:flex;flex-direction:column;position:relative;overflow:hidden;}
+.hero-bg-text{position:absolute;bottom:-2rem;left:-0.5rem;font-family:'Bebas Neue',sans-serif;font-size:clamp(12rem,30vw,22rem);letter-spacing:-0.02em;color:rgba(255,255,255,0.025);line-height:1;pointer-events:none;white-space:nowrap;z-index:0;user-select:none;}
+.hero-corner{position:absolute;top:56px;right:0;width:6px;height:120px;background:var(--red);}
+.hero-content{flex:1;display:flex;flex-direction:column;justify-content:center;padding:4rem 2rem 2rem;max-width:1100px;margin:0 auto;width:100%;position:relative;z-index:2;}
+.hero-eyebrow{font-family:'Barlow Condensed',sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:0.25em;text-transform:uppercase;color:var(--red);margin-bottom:1.5rem;display:flex;align-items:center;gap:0.75rem;animation:fadeUp 0.5s ease both;}
+.hero-eyebrow::before{content:'';display:block;width:24px;height:2px;background:var(--red);}
+.hero-h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(5rem,14vw,11rem);line-height:0.88;letter-spacing:0.03em;color:var(--white);margin-bottom:2rem;animation:fadeUp 0.5s ease 0.07s both;}
+.hero-h1 .outline{color:transparent;-webkit-text-stroke:2px rgba(255,255,255,0.2);}
+.hero-h1 .red{color:var(--red);}
+.hero-sub{font-family:'Barlow',sans-serif;font-size:clamp(0.9rem,2vw,1.05rem);font-weight:300;color:var(--t2);max-width:480px;line-height:1.7;margin-bottom:2.5rem;animation:fadeUp 0.5s ease 0.12s both;}
+.hero-btns{display:flex;gap:0.75rem;flex-wrap:wrap;animation:fadeUp 0.5s ease 0.17s both;}
+.btn-primary{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:0.12em;color:var(--black);background:var(--red);border:none;padding:0.75rem 2.5rem 0.6rem;cursor:pointer;text-decoration:none;display:inline-block;transition:all 0.15s;}
+.btn-primary:hover{background:#ff0033;transform:translateY(-2px);box-shadow:0 8px 30px var(--red-glow);}
+.btn-ghost{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:0.12em;color:var(--white);background:transparent;border:1px solid var(--border-2);padding:0.75rem 2.5rem 0.6rem;cursor:pointer;text-decoration:none;display:inline-block;transition:all 0.15s;}
+.btn-ghost:hover{border-color:rgba(255,255,255,0.35);background:rgba(255,255,255,0.04);}
+.hero-metrics{border-top:1px solid var(--border);display:grid;grid-template-columns:repeat(4,1fr);background:var(--black);position:relative;z-index:2;}
+.hm{padding:1.75rem 2rem;border-right:1px solid var(--border);}
+.hm:last-child{border-right:none;}
+.hm-val{font-family:'Bebas Neue',sans-serif;font-size:2.5rem;letter-spacing:0.04em;color:var(--white);line-height:1;margin-bottom:0.2rem;}
+.hm-val.red{color:var(--red);}
+.hm-label{font-family:'Barlow Condensed',sans-serif;font-size:0.72rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--t3);}
+@media(max-width:600px){.hero-metrics{grid-template-columns:1fr 1fr;}.hm:nth-child(2){border-right:none;}.hm:nth-child(1),.hm:nth-child(2){border-bottom:1px solid var(--border);}}
+.ticker{background:var(--red);height:38px;overflow:hidden;display:flex;align-items:center;}
+.ticker-track{display:flex;white-space:nowrap;animation:ticker-scroll 22s linear infinite;}
+.t-item{font-family:'Bebas Neue',sans-serif;font-size:0.85rem;letter-spacing:0.2em;color:var(--black);padding:0 2rem;opacity:0.7;}
+.t-sep{font-family:'Bebas Neue',sans-serif;font-size:0.85rem;color:rgba(0,0,0,0.3);padding:0 0.5rem;}
+@keyframes ticker-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.section{padding:6rem 2rem;}
+.section-inner{max-width:1100px;margin:0 auto;}
+.s-eyebrow{font-family:'Barlow Condensed',sans-serif;font-size:0.7rem;font-weight:700;letter-spacing:0.25em;text-transform:uppercase;color:var(--red);margin-bottom:0.6rem;display:flex;align-items:center;gap:0.6rem;}
+.s-eyebrow::before{content:'';width:18px;height:2px;background:var(--red);flex-shrink:0;}
+.s-h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,6vw,5.5rem);letter-spacing:0.04em;line-height:0.9;color:var(--white);margin-bottom:1rem;}
+.s-p{font-family:'Barlow',sans-serif;font-size:0.95rem;font-weight:300;color:var(--t2);max-width:440px;line-height:1.7;}
+.how-section{background:var(--bg-1);}
+.how-top{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:2rem;margin-bottom:2.5rem;}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);}
+.step{background:var(--bg-1);padding:2rem 1.75rem;transition:background 0.15s;position:relative;}
+.step:hover{background:var(--bg-2);}
+.step-n{font-family:'Bebas Neue',sans-serif;font-size:3rem;letter-spacing:0.04em;color:rgba(255,255,255,0.05);line-height:1;margin-bottom:1rem;}
+.step-title{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:0.06em;color:var(--white);margin-bottom:0.6rem;}
+.step-desc{font-family:'Barlow',sans-serif;font-size:0.85rem;font-weight:300;color:var(--t2);line-height:1.65;}
+.step-line{position:absolute;top:0;left:0;width:100%;height:2px;background:transparent;transition:background 0.2s;}
+.step:hover .step-line{background:var(--red);}
+@media(max-width:860px){.steps{grid-template-columns:1fr 1fr;}}
+@media(max-width:480px){.steps{grid-template-columns:1fr;}}
+.group-callout{margin-top:1.5rem;padding:1.5rem 2rem;background:var(--red-dim);border:1px solid rgba(232,0,45,0.2);display:flex;gap:1.5rem;align-items:flex-start;}
+.gc-label{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:0.1em;color:var(--red);white-space:nowrap;padding-top:0.1rem;}
+.gc-text{font-family:'Barlow',sans-serif;font-size:0.875rem;font-weight:300;color:var(--t2);line-height:1.65;}
+.pricing-section{background:var(--bg);}
+.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);margin-top:3rem;}
+@media(max-width:760px){.price-grid{grid-template-columns:1fr;}}
+.pc{background:var(--bg);padding:2rem;position:relative;transition:background 0.15s;}
+.pc:hover{background:var(--bg-1);}
+.pc.featured{background:var(--red);}
+.pc.featured:hover{background:#f0002f;}
+.pc-top-bar{position:absolute;top:0;left:0;right:0;height:2px;background:var(--border);}
+.pc.featured .pc-top-bar{background:rgba(0,0,0,0.2);}
+.pc-tag{font-family:'Bebas Neue',sans-serif;font-size:0.75rem;letter-spacing:0.18em;color:var(--black);background:var(--white);padding:0.15rem 0.65rem;display:inline-block;margin-bottom:1.25rem;}
+.pc-type{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:0.06em;color:var(--white);margin-bottom:0.15rem;}
+.pc.featured .pc-type{color:var(--black);}
+.pc-sub{font-family:'Barlow Condensed',sans-serif;font-size:0.72rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--t3);margin-bottom:1.5rem;}
+.pc.featured .pc-sub{color:rgba(0,0,0,0.5);}
+.pc-price{font-family:'Bebas Neue',sans-serif;font-size:4rem;letter-spacing:0.02em;color:var(--red);line-height:1;margin-bottom:0.15rem;}
+.pc.featured .pc-price{color:var(--black);}
+.pc-unit{font-family:'Barlow Condensed',sans-serif;font-size:0.72rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--t3);margin-bottom:1.75rem;}
+.pc.featured .pc-unit{color:rgba(0,0,0,0.4);}
+.pc-list{list-style:none;display:flex;flex-direction:column;gap:0.55rem;}
+.pc-list li{font-family:'Barlow',sans-serif;font-size:0.845rem;font-weight:300;color:var(--t2);display:flex;gap:0.65rem;align-items:flex-start;line-height:1.45;}
+.pc.featured .pc-list li{color:rgba(0,0,0,0.65);}
+.pc-list li::before{content:'';width:4px;height:4px;background:var(--red);flex-shrink:0;margin-top:0.5rem;}
+.pc.featured .pc-list li::before{background:rgba(0,0,0,0.3);}
+.compare{margin-top:1.5rem;border:1px solid var(--border);background:var(--bg-1);}
+.cmp-head{display:grid;grid-template-columns:2fr 1fr 1fr;padding:0.75rem 1.5rem;background:var(--bg-2);border-bottom:1px solid var(--border);}
+.cmp-head span{font-family:'Barlow Condensed',sans-serif;font-size:0.65rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--t3);}
+.cmp-head .us-h{color:var(--red);}
+.cmp-row{display:grid;grid-template-columns:2fr 1fr 1fr;padding:0.8rem 1.5rem;border-bottom:1px solid var(--border);transition:background 0.12s;align-items:center;}
+.cmp-row:last-child{border-bottom:none;}
+.cmp-row:hover{background:var(--bg-2);}
+.cmp-row.winner{background:rgba(232,0,45,0.05);}
+.cd{font-family:'Barlow',sans-serif;font-size:0.845rem;font-weight:300;color:var(--t2);}
+.cd.strong{color:var(--t1);font-weight:500;}
+.ct{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:0.04em;color:rgba(255,255,255,0.25);}
+.cu{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:0.04em;color:#00E676;}
+.cu.red-big{color:var(--red);font-size:1.1rem;}
+.hours-section{background:var(--bg-1);}
+.hours-layout{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:3rem;}
+@media(max-width:680px){.hours-layout{grid-template-columns:1fr;}}
+.day-list{border:1px solid var(--border);background:var(--bg);}
+.day-row{display:flex;justify-content:space-between;align-items:center;padding:1.1rem 1.5rem;border-bottom:1px solid var(--border);transition:background 0.12s;}
+.day-row:last-child{border-bottom:none;}
+.day-row.active:hover{background:var(--bg-1);}
+.day-row.closed{opacity:0.25;}
+.dr-name{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:0.1em;color:var(--t1);}
+.dr-time{display:flex;align-items:center;gap:0.6rem;font-family:'Barlow Condensed',sans-serif;font-size:0.82rem;font-weight:700;letter-spacing:0.08em;color:var(--t2);}
+.peak-tag{font-family:'Bebas Neue',sans-serif;font-size:0.6rem;letter-spacing:0.12em;color:var(--black);background:var(--red);padding:0.1rem 0.45rem;}
+.hours-notes{display:flex;flex-direction:column;gap:1px;background:var(--border);border:1px solid var(--border);}
+.hn{background:var(--bg);padding:1.25rem 1.5rem;transition:background 0.12s;}
+.hn:hover{background:var(--bg-1);}
+.hn.red-accent{background:var(--red-dim);}
+.hn-title{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:0.08em;color:var(--white);margin-bottom:0.35rem;}
+.hn.red-accent .hn-title{color:var(--red);}
+.hn-body{font-family:'Barlow',sans-serif;font-size:0.845rem;font-weight:300;color:var(--t2);line-height:1.65;}
+.amb-section{background:var(--bg);}
+.amb-layout{display:grid;grid-template-columns:1fr 1fr;gap:3rem;margin-top:3rem;align-items:start;}
+@media(max-width:760px){.amb-layout{grid-template-columns:1fr;}}
+.perk-list{display:flex;flex-direction:column;gap:1px;background:var(--border);border:1px solid var(--border);}
+.perk{background:var(--bg);padding:1.5rem;display:flex;gap:1.25rem;align-items:flex-start;transition:background 0.12s;position:relative;}
+.perk:hover{background:var(--bg-1);}
+.perk-left-bar{position:absolute;top:0;left:0;width:2px;height:0;background:var(--red);transition:height 0.25s ease;}
+.perk:hover .perk-left-bar{height:100%;}
+.perk-num{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:0.06em;color:rgba(255,255,255,0.08);min-width:28px;line-height:1;}
+.perk-title{font-family:'Bebas Neue',sans-serif;font-size:1.15rem;letter-spacing:0.06em;color:var(--white);margin-bottom:0.35rem;}
+.perk-desc{font-family:'Barlow',sans-serif;font-size:0.845rem;font-weight:300;color:var(--t2);line-height:1.65;}
+.apply-btn{display:inline-block;margin-top:1.5rem;font-family:'Bebas Neue',sans-serif;font-size:1.05rem;letter-spacing:0.14em;color:var(--black);background:var(--red);border:none;padding:0.7rem 2rem 0.55rem;cursor:pointer;text-decoration:none;transition:all 0.15s;}
+.apply-btn:hover{background:#ff0033;transform:translateY(-1px);box-shadow:0 8px 28px var(--red-glow);}
+.earn-card{border:1px solid var(--border);background:var(--bg-1);position:sticky;top:76px;}
+.ec-head{padding:1.25rem 1.5rem;background:var(--bg-2);border-bottom:1px solid var(--border);}
+.ec-head-title{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:0.08em;color:var(--white);margin-bottom:0.15rem;}
+.ec-head-sub{font-family:'Barlow Condensed',sans-serif;font-size:0.7rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--t3);}
+.ec-row{display:flex;justify-content:space-between;align-items:center;padding:0.9rem 1.5rem;border-bottom:1px solid var(--border);background:var(--bg-1);}
+.ec-row:last-of-type{border-bottom:none;}
+.ec-label{font-family:'Barlow Condensed',sans-serif;font-size:0.78rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--t3);}
+.ec-val{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:0.06em;color:var(--t1);}
+.ec-val.green{color:#00E676;}
+.ec-total{padding:2rem 1.5rem;background:var(--red);text-align:center;}
+.ec-total-label{font-family:'Barlow Condensed',sans-serif;font-size:0.68rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:rgba(0,0,0,0.5);margin-bottom:0.4rem;}
+.ec-total-num{font-family:'Bebas Neue',sans-serif;font-size:5rem;letter-spacing:0.02em;color:var(--black);line-height:1;}
+.ec-total-sub{font-family:'Barlow Condensed',sans-serif;font-size:0.75rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:rgba(0,0,0,0.4);margin-top:0.3rem;}
+.ec-note{padding:0.85rem 1.5rem;background:var(--bg-2);border-top:1px solid var(--border);font-family:'Barlow',sans-serif;font-size:0.72rem;font-weight:300;color:var(--t3);line-height:1.55;}
+.risks-section{background:var(--bg-1);}
+.risk-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);margin-top:3rem;}
+@media(max-width:760px){.risk-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:480px){.risk-grid{grid-template-columns:1fr;}}
+.risk{background:var(--bg-1);padding:1.75rem;transition:background 0.12s;position:relative;}
+.risk:hover{background:var(--bg-2);}
+.risk-top-bar{position:absolute;top:0;left:0;right:0;height:2px;}
+.rb-low{background:#00E676;}.rb-med{background:var(--red);}
+.risk-badge{font-family:'Bebas Neue',sans-serif;font-size:0.7rem;letter-spacing:0.16em;padding:0.1rem 0.6rem;display:inline-block;margin-bottom:1rem;}
+.badge-low{color:#000;background:#00E676;}.badge-med{color:#fff;background:var(--red);}
+.risk-title{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:0.06em;color:var(--white);margin-bottom:0.4rem;}
+.risk-desc{font-family:'Barlow',sans-serif;font-size:0.82rem;font-weight:300;color:var(--t2);line-height:1.6;margin-bottom:0.65rem;}
+.risk-mit{font-family:'Barlow',sans-serif;font-size:0.78rem;font-weight:300;color:var(--t3);line-height:1.55;font-style:italic;}
+.order-section{background:var(--bg);}
+.order-layout{display:grid;grid-template-columns:1.1fr 0.9fr;gap:3rem;margin-top:3rem;align-items:start;}
+@media(max-width:760px){.order-layout{grid-template-columns:1fr;}}
+.form-card{background:var(--bg-1);border:1px solid var(--border);padding:2.5rem;}
+.fg{margin-bottom:1.25rem;}
+.fl{display:block;font-family:'Barlow Condensed',sans-serif;font-size:0.7rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--t3);margin-bottom:0.45rem;}
+.fi,.fs,.fta{width:100%;background:var(--bg-2);border:1px solid var(--border);padding:0.8rem 1rem;font-family:'Barlow',sans-serif;font-size:0.9rem;font-weight:300;color:var(--t1);outline:none;transition:border-color 0.15s,box-shadow 0.15s;appearance:none;-webkit-appearance:none;border-radius:0;}
+.fi:focus,.fs:focus,.fta:focus{border-color:rgba(232,0,45,0.5);box-shadow:0 0 0 3px rgba(232,0,45,0.08);background:var(--bg-3);}
+.fi::placeholder,.fta::placeholder{color:var(--t3);}
+.fta{resize:vertical;min-height:110px;}
+.fs option{background:var(--bg-2);}
+.fhint{font-family:'Barlow',sans-serif;font-size:0.72rem;font-weight:300;color:var(--t3);margin-top:0.35rem;line-height:1.5;}
+.form-row2{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+@media(max-width:500px){.form-row2{grid-template-columns:1fr;}}
+.sub-btn{width:100%;background:var(--red);color:var(--black);border:none;padding:1rem;font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:0.14em;cursor:pointer;transition:all 0.15s;margin-top:0.5rem;}
+.sub-btn:hover{background:#ff0033;transform:translateY(-1px);box-shadow:0 8px 28px var(--red-glow);}
+.order-side{display:flex;flex-direction:column;gap:1px;background:var(--border);border:1px solid var(--border);position:sticky;top:76px;}
+.sc{background:var(--bg);padding:1.25rem 1.5rem;transition:background 0.12s;}
+.sc:hover{background:var(--bg-1);}
+.sc.red-tint{background:var(--red-dim);}
+.sc-title{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:0.08em;color:var(--white);margin-bottom:0.4rem;}
+.sc.red-tint .sc-title{color:var(--red);}
+.sc-body{font-family:'Barlow',sans-serif;font-size:0.845rem;font-weight:300;color:var(--t2);line-height:1.65;}
+.sc-body strong{color:var(--t1);font-weight:500;}
+.sc-body a{color:var(--red);text-decoration:none;}
+.sc-body a:hover{text-decoration:underline;}
+.venmo-chip{display:inline-flex;align-items:center;gap:0.3rem;margin-top:0.5rem;padding:0.2rem 0.65rem;border:1px solid rgba(255,255,255,0.1);font-family:'Bebas Neue',sans-serif;font-size:0.85rem;letter-spacing:0.08em;color:rgba(255,255,255,0.4);}
+footer{background:var(--black);border-top:1px solid var(--border);padding:4rem 2rem 2.5rem;}
+.foot-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:3rem;padding-bottom:3rem;border-bottom:1px solid var(--border);}
+@media(max-width:760px){.foot-inner{grid-template-columns:1fr 1fr;}}
+@media(max-width:480px){.foot-inner{grid-template-columns:1fr;}}
+.foot-logo{font-family:'Bebas Neue',sans-serif;font-size:2.5rem;letter-spacing:0.08em;color:var(--white);line-height:1;margin-bottom:0.5rem;}
+.foot-logo span{color:var(--red);}
+.foot-tag{font-family:'Barlow',sans-serif;font-size:0.845rem;font-weight:300;color:var(--t3);line-height:1.6;max-width:220px;}
+.foot-col-label{font-family:'Bebas Neue',sans-serif;font-size:0.75rem;letter-spacing:0.2em;color:var(--t3);margin-bottom:1rem;}
+.foot-links{list-style:none;display:flex;flex-direction:column;gap:0.6rem;}
+.foot-links a{font-family:'Barlow',sans-serif;font-size:0.845rem;font-weight:300;color:var(--t2);text-decoration:none;transition:color 0.12s;}
+.foot-links a:hover{color:var(--white);}
+.foot-bottom{max-width:1100px;margin:2rem auto 0;display:flex;justify-content:space-between;align-items:flex-start;gap:2rem;flex-wrap:wrap;}
+.foot-disclaimer{font-family:'Barlow',sans-serif;font-size:0.7rem;font-weight:300;color:var(--t3);line-height:1.65;max-width:660px;}
+.foot-copy{font-family:'Bebas Neue',sans-serif;font-size:0.85rem;letter-spacing:0.1em;color:var(--t3);white-space:nowrap;}
+#toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(80px);background:var(--red);color:var(--black);padding:0.85rem 2rem;font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:0.12em;z-index:9999;transition:transform 0.4s cubic-bezier(.34,1.56,.64,1);white-space:nowrap;box-shadow:0 8px 32px var(--red-glow);}
+#toast.show{transform:translateX(-50%) translateY(0);}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.5s cubic-bezier(.22,1,.36,1),transform 0.5s cubic-bezier(.22,1,.36,1);}
+.reveal.d1{transition-delay:0.08s;}.reveal.d2{transition-delay:0.16s;}
+.reveal.visible{opacity:1;transform:translateY(0);}
 </style>
 </head>
 <body>
-
-<!-- NAV -->
 <nav>
-  <a href="#" class="logo">Pronto</a>
+  <a href="#" class="nav-logo">PRONTO<span class="dot">.</span></a>
   <ul class="nav-links">
-    <li><a href="#how">How It Works</a></li>
-    <li><a href="#pricing">Pricing</a></li>
-    <li><a href="#hours">Hours</a></li>
-    <li><a href="#ambassador">Earn</a></li>
+    <li><a href="#how">HOW IT WORKS</a></li>
+    <li><a href="#pricing">PRICING</a></li>
+    <li><a href="#hours">HOURS</a></li>
+    <li><a href="#ambassador">EARN</a></li>
   </ul>
   <div class="nav-right">
-    <div class="status-tag">
-      <div class="sdot" id="statusDot"></div>
-      <span id="statusText">—</span>
-    </div>
-    <a href="#order" class="btn-cta">Order Now</a>
+    <div class="status-chip"><div class="sdot" id="statusDot"></div><span id="statusText">—</span></div>
+    <a href="#order" class="btn-nav">ORDER NOW</a>
   </div>
 </nav>
-
-<!-- HERO -->
 <div class="hero">
-  <div class="hero-bg-blur"></div>
+  <div class="hero-bg-text">PRONTO.</div>
+  <div class="hero-corner"></div>
   <div class="hero-content">
-    <div class="hero-label">
-      <div class="label-dot"></div>
-      UNC Chapel Hill · Campus Delivery
-    </div>
-    <h1 class="hero-h1">
-      Delivery that<br>
-      doesn't rip<br>
-      <span class="muted">you off.</span>
-    </h1>
-    <p class="hero-p">Franklin Street restaurants delivered to your dorm. No food markup, no surge pricing, no pressure to tip. Run by a fellow Tar Heel.</p>
+    <div class="hero-eyebrow">UNC Chapel Hill · Campus Delivery</div>
+    <h1 class="hero-h1">FOOD AT<br>YOUR <span class="red">DOOR.</span><br><span class="outline">30% LESS.</span></h1>
+    <p class="hero-sub">Franklin Street restaurants delivered to your dorm. No food markup, no surge pricing, no pressure to tip. Run by a fellow Tar Heel who's done paying $33 for an $18 meal.</p>
     <div class="hero-btns">
-      <a href="#order" class="btn-primary">Place an Order</a>
-      <a href="#ambassador" class="btn-secondary">Earn as Ambassador</a>
+      <a href="#order" class="btn-primary">PLACE AN ORDER</a>
+      <a href="#ambassador" class="btn-ghost">EARN AS AMBASSADOR</a>
     </div>
   </div>
   <div class="hero-metrics">
-    <div class="hm"><div class="hm-val">$4.99</div><div class="hm-label">Flat delivery fee</div></div>
-    <div class="hm"><div class="hm-val">8%</div><div class="hm-label">Service fee (DoorDash: 15%+)</div></div>
+    <div class="hm"><div class="hm-val red">$4.99</div><div class="hm-label">Flat delivery fee</div></div>
+    <div class="hm"><div class="hm-val">8%</div><div class="hm-label">Service fee — DoorDash charges 15%+</div></div>
     <div class="hm"><div class="hm-val">~30%</div><div class="hm-label">Cheaper than DoorDash</div></div>
-    <div class="hm"><div class="hm-val">35 min</div><div class="hm-label">Average delivery</div></div>
+    <div class="hm"><div class="hm-val">35 MIN</div><div class="hm-label">Average delivery time</div></div>
   </div>
 </div>
-
-<!-- TICKER -->
 <div class="ticker">
   <div class="ticker-track">
-    <span class="t-item">No food markup</span>
-    <span class="t-item">No surge pricing</span>
-    <span class="t-item">No tip pressure</span>
-    <span class="t-item">No download required</span>
-    <span class="t-item">Student run</span>
-    <span class="t-item">Chapel Hill</span>
-    <span class="t-item">Fast and affordable</span>
-    <span class="t-item">No food markup</span>
-    <span class="t-item">No surge pricing</span>
-    <span class="t-item">No tip pressure</span>
-    <span class="t-item">No download required</span>
-    <span class="t-item">Student run</span>
-    <span class="t-item">Chapel Hill</span>
-    <span class="t-item">Fast and affordable</span>
+    <span class="t-item">NO FOOD MARKUP</span><span class="t-sep">·</span><span class="t-item">NO SURGE PRICING</span><span class="t-sep">·</span><span class="t-item">NO TIP PRESSURE</span><span class="t-sep">·</span><span class="t-item">NO DOWNLOAD</span><span class="t-sep">·</span><span class="t-item">STUDENT RUN</span><span class="t-sep">·</span><span class="t-item">CHAPEL HILL</span><span class="t-sep">·</span><span class="t-item">FAST AND AFFORDABLE</span><span class="t-sep">·</span><span class="t-item">NO FOOD MARKUP</span><span class="t-sep">·</span><span class="t-item">NO SURGE PRICING</span><span class="t-sep">·</span><span class="t-item">NO TIP PRESSURE</span><span class="t-sep">·</span><span class="t-item">NO DOWNLOAD</span><span class="t-sep">·</span><span class="t-item">STUDENT RUN</span><span class="t-sep">·</span><span class="t-item">CHAPEL HILL</span><span class="t-sep">·</span><span class="t-item">FAST AND AFFORDABLE</span><span class="t-sep">·</span>
   </div>
 </div>
-
-<!-- HOW -->
 <section id="how" class="section how-section">
   <div class="section-inner">
     <div class="how-top reveal">
-      <div>
-        <div class="s-eyebrow">The Process</div>
-        <h2 class="s-h2">How it works</h2>
-      </div>
-      <p class="s-p">No app. No account. Fill out a form, get a text, food shows up. That's the whole thing.</p>
+      <div><div class="s-eyebrow">THE PROCESS</div><h2 class="s-h2">HOW IT WORKS</h2></div>
+      <p class="s-p">No app. No account. Fill out a form, get a text, food shows up. That's it.</p>
     </div>
     <div class="steps reveal">
-      <div class="step">
-        <div class="step-n">Step 01</div>
-        <div class="step-title">Fill the form</div>
-        <div class="step-desc">Tell us your restaurant, order, dorm, and Venmo. Takes under 60 seconds. No account or download required.</div>
-      </div>
-      <div class="step">
-        <div class="step-n">Step 02</div>
-        <div class="step-title">Get confirmed</div>
-        <div class="step-desc">Text confirmation with your total and ETA within 5 minutes. We'll flag anything unavailable before placing your order.</div>
-      </div>
-      <div class="step">
-        <div class="step-n">Step 03</div>
-        <div class="step-title">We pick it up</div>
-        <div class="step-desc">Order placed, food picked up fresh in an insulated bag. Second text when we're heading your way.</div>
-      </div>
-      <div class="step">
-        <div class="step-n">Step 04</div>
-        <div class="step-title">Delivered to you</div>
-        <div class="step-desc">Final text when we're at your building. Meet us at the lobby. Pay via Venmo at drop-off — or send early if you prefer.</div>
-      </div>
+      <div class="step"><div class="step-line"></div><div class="step-n">01</div><div class="step-title">FILL THE FORM</div><div class="step-desc">Tell us your restaurant, order, dorm, and Venmo. Under 60 seconds. No account or download required.</div></div>
+      <div class="step"><div class="step-line"></div><div class="step-n">02</div><div class="step-title">GET CONFIRMED</div><div class="step-desc">Text confirmation with your total and ETA within 5 minutes. We'll flag anything unavailable before placing your order.</div></div>
+      <div class="step"><div class="step-line"></div><div class="step-n">03</div><div class="step-title">WE PICK IT UP</div><div class="step-desc">Order placed, food picked up fresh in an insulated bag. Second text when we're heading your way.</div></div>
+      <div class="step"><div class="step-line"></div><div class="step-n">04</div><div class="step-title">DELIVERED TO YOU</div><div class="step-desc">Final text when we're at your building. Meet us at the lobby. Pay via Venmo at drop-off or send early.</div></div>
     </div>
-    <div class="info-strip reveal">
-      <div class="strip-tag">Group Orders</div>
-      <div class="strip-text">Ordering with 3 or more people? Submit one group order and split a flat $6.99 delivery fee — under $2.50 per person. The organizer gets 10% off their own item as a thank you. Just select Group Order in the form.</div>
+    <div class="group-callout reveal">
+      <div class="gc-label">GROUP ORDERS</div>
+      <div class="gc-text">Ordering with 3 or more people? Submit one group order and split a flat $6.99 delivery fee — under $2.50 per person. The organizer gets 10% off their own item. Select Group Order in the form below.</div>
     </div>
   </div>
 </section>
-
-<!-- PRICING -->
 <section id="pricing" class="section pricing-section">
   <div class="section-inner">
-    <div class="reveal">
-      <div class="s-eyebrow">Transparent Pricing</div>
-      <h2 class="s-h2">No hidden fees. Ever.</h2>
-      <p class="s-p">You pay what the restaurant charges. We add a small delivery and service fee — and that's it.</p>
-    </div>
-    <div class="price-cards">
-      <div class="pc reveal">
-        <div class="pc-type">Solo Order</div>
-        <div class="pc-sub">One person, one drop-off</div>
-        <div class="pc-price">$4.99</div>
-        <div class="pc-unit">flat delivery fee</div>
-        <ul class="pc-list">
-          <li>+ 8% service fee on food subtotal</li>
-          <li>Minimum $10 order</li>
-          <li>Zone A (South Campus – Franklin): included</li>
-          <li>Zone B (Granville, Carmichael): +$1.50</li>
-          <li>Text updates at every stage</li>
-        </ul>
-      </div>
-      <div class="pc featured reveal d1">
-        <div class="pc-tag">Best Value</div>
-        <div class="pc-type">Group Order</div>
-        <div class="pc-sub">3+ people, one building</div>
-        <div class="pc-price">$6.99</div>
-        <div class="pc-unit">flat group fee</div>
-        <ul class="pc-list">
-          <li>+ 8% service fee on combined total</li>
-          <li>Minimum $25 combined order</li>
-          <li>Up to 6 people per group</li>
-          <li>Single lobby drop-off</li>
-          <li>Organizer gets 10% off their item</li>
-        </ul>
-      </div>
-      <div class="pc reveal d2">
-        <div class="pc-type">Weekend Late Night</div>
-        <div class="pc-sub">Fri & Sat after midnight</div>
-        <div class="pc-price">$5.99</div>
-        <div class="pc-unit">delivery fee</div>
-        <ul class="pc-list">
-          <li>+ 8% service fee</li>
-          <li>12AM – 2AM Friday & Saturday only</li>
-          <li>Limited capacity — order early</li>
-          <li>Same insulated bag delivery</li>
-          <li>Still cheaper than DoorDash surge</li>
-        </ul>
-      </div>
+    <div class="reveal"><div class="s-eyebrow">TRANSPARENT PRICING</div><h2 class="s-h2">NO HIDDEN FEES. EVER.</h2><p class="s-p">You pay what the restaurant charges. We add a small delivery and service fee. Nothing else.</p></div>
+    <div class="price-grid">
+      <div class="pc reveal"><div class="pc-top-bar"></div><div class="pc-type">SOLO ORDER</div><div class="pc-sub">One person, one drop-off</div><div class="pc-price">$4.99</div><div class="pc-unit">Flat delivery fee</div><ul class="pc-list"><li>+ 8% service fee on food subtotal</li><li>Minimum $10 order</li><li>Zone A (South Campus – Franklin): included</li><li>Zone B (Granville, Carmichael): +$1.50</li><li>Text updates at every stage</li></ul></div>
+      <div class="pc featured reveal d1"><div class="pc-top-bar"></div><div class="pc-tag">BEST VALUE</div><div class="pc-type">GROUP ORDER</div><div class="pc-sub">3+ people, one building</div><div class="pc-price">$6.99</div><div class="pc-unit">Flat group fee</div><ul class="pc-list"><li>+ 8% service fee on combined total</li><li>Minimum $25 combined order</li><li>Up to 6 people per group</li><li>Single lobby drop-off</li><li>Organizer gets 10% off their item</li></ul></div>
+      <div class="pc reveal d2"><div class="pc-top-bar"></div><div class="pc-type">LATE NIGHT</div><div class="pc-sub">Fri & Sat after midnight</div><div class="pc-price">$5.99</div><div class="pc-unit">Delivery fee</div><ul class="pc-list"><li>+ 8% service fee</li><li>12AM – 2AM Friday & Saturday only</li><li>Limited capacity — order early</li><li>Same insulated bag delivery</li><li>Still cheaper than DoorDash surge</li></ul></div>
     </div>
     <div class="compare reveal">
-      <div class="compare-hd">
-        <span>$18 meal — head to head</span>
-        <span>DoorDash</span>
-        <span class="us">Pronto</span>
-      </div>
-      <div class="compare-r"><span class="cd">Food price</span><span class="ct">~$20.70 (+15%)</span><span class="cu">$18.00</span></div>
-      <div class="compare-r"><span class="cd">Delivery fee</span><span class="ct">$5.99</span><span class="cu">$4.99</span></div>
-      <div class="compare-r"><span class="cd">Service fee</span><span class="ct">$3.49</span><span class="cu">$1.44</span></div>
-      <div class="compare-r"><span class="cd">Tip pressure</span><span class="ct">$3.00+</span><span class="cu">None</span></div>
-      <div class="compare-r hl"><span class="cd strong">Total</span><span class="ct" style="font-size:.9rem;font-weight:700">~$33.18</span><span class="cu big">$24.43</span></div>
-      <div class="compare-r"><span class="cd" style="color:var(--green);font-weight:600">You save</span><span class="ct"></span><span class="cu big">$8.75 — 26%</span></div>
+      <div class="cmp-head"><span>$18 MEAL — HEAD TO HEAD</span><span>DOORDASH</span><span class="us-h">PRONTO</span></div>
+      <div class="cmp-row"><span class="cd">Food price</span><span class="ct">~$20.70 (+15%)</span><span class="cu">$18.00</span></div>
+      <div class="cmp-row"><span class="cd">Delivery fee</span><span class="ct">$5.99</span><span class="cu">$4.99</span></div>
+      <div class="cmp-row"><span class="cd">Service fee</span><span class="ct">$3.49</span><span class="cu">$1.44</span></div>
+      <div class="cmp-row"><span class="cd">Tip pressure</span><span class="ct">$3.00+</span><span class="cu">NONE</span></div>
+      <div class="cmp-row winner"><span class="cd strong">TOTAL</span><span class="ct">~$33.18</span><span class="cu red-big">$24.43</span></div>
+      <div class="cmp-row"><span class="cd" style="color:var(--red);font-weight:500">YOU SAVE</span><span class="ct"></span><span class="cu red-big">$8.75 — 26%</span></div>
     </div>
   </div>
 </section>
-
-<!-- HOURS -->
 <section id="hours" class="section hours-section">
   <div class="section-inner">
-    <div class="reveal">
-      <div class="s-eyebrow">When We Run</div>
-      <h2 class="s-h2">Hours</h2>
-      <p class="s-p">Evenings and late nights — when the dining hall is closed and you actually need delivery.</p>
-    </div>
+    <div class="reveal"><div class="s-eyebrow">WHEN WE RUN</div><h2 class="s-h2">HOURS</h2><p class="s-p">Evenings and late nights — when the dining hall is closed and you actually need delivery.</p></div>
     <div class="hours-layout">
       <div class="day-list reveal">
-        <div class="day-row closed"><span class="dr-name">Monday</span><span class="dr-time">Closed</span></div>
-        <div class="day-row active"><span class="dr-name">Tuesday</span><span class="dr-time">9PM – 12AM</span></div>
-        <div class="day-row active"><span class="dr-name">Wednesday</span><span class="dr-time">9PM – 12AM</span></div>
-        <div class="day-row active peak"><span class="dr-name">Thursday</span><span class="dr-time">9PM – 1AM <span class="peak-chip">Peak</span></span></div>
-        <div class="day-row active peak"><span class="dr-name">Friday</span><span class="dr-time">9PM – 2AM <span class="peak-chip">Peak</span></span></div>
-        <div class="day-row active peak"><span class="dr-name">Saturday</span><span class="dr-time">9PM – 2AM <span class="peak-chip">Peak</span></span></div>
-        <div class="day-row closed"><span class="dr-name">Sunday</span><span class="dr-time">Closed</span></div>
+        <div class="day-row closed"><span class="dr-name">MONDAY</span><span class="dr-time">CLOSED</span></div>
+        <div class="day-row active"><span class="dr-name">TUESDAY</span><span class="dr-time">9PM – 12AM</span></div>
+        <div class="day-row active"><span class="dr-name">WEDNESDAY</span><span class="dr-time">9PM – 12AM</span></div>
+        <div class="day-row active"><span class="dr-name">THURSDAY</span><span class="dr-time">9PM – 1AM <span class="peak-tag">PEAK</span></span></div>
+        <div class="day-row active"><span class="dr-name">FRIDAY</span><span class="dr-time">9PM – 2AM <span class="peak-tag">PEAK</span></span></div>
+        <div class="day-row active"><span class="dr-name">SATURDAY</span><span class="dr-time">9PM – 2AM <span class="peak-tag">PEAK</span></span></div>
+        <div class="day-row closed"><span class="dr-name">SUNDAY</span><span class="dr-time">CLOSED</span></div>
       </div>
-      <div class="hours-notes">
-        <div class="hn highlight reveal d1">
-          <div class="hn-title">Right now</div>
-          <div class="hn-body" id="statusCard">Checking hours…</div>
-        </div>
-        <div class="hn reveal d1">
-          <div class="hn-title">Last orders</div>
-          <div class="hn-body">Place your order at least 20 minutes before close. We may stop accepting early on high-demand nights.</div>
-        </div>
-        <div class="hn reveal d1">
-          <div class="hn-title">Live updates</div>
-          <div class="hn-body">Follow <strong>@prontounc</strong> on Instagram for real-time status. We post when we're near capacity or closing early.</div>
-        </div>
-        <div class="hn reveal d1">
-          <div class="hn-title">Why these hours?</div>
-          <div class="hn-body">Late nights are when DoorDash surges, the dining hall is closed, and you're hungry mid-problem-set. That's exactly the window we're built for.</div>
-        </div>
+      <div class="hours-notes reveal d1">
+        <div class="hn red-accent"><div class="hn-title">RIGHT NOW</div><div class="hn-body" id="statusCard">Checking hours…</div></div>
+        <div class="hn"><div class="hn-title">LAST ORDERS</div><div class="hn-body">Place your order at least 20 minutes before close. We may stop accepting early on high-demand nights.</div></div>
+        <div class="hn"><div class="hn-title">LIVE UPDATES</div><div class="hn-body">Follow <strong style="color:var(--t1)">@ryanguzman._</strong> on Instagram for real-time status. We post when we're near capacity or closing early.</div></div>
+        <div class="hn"><div class="hn-title">WHY THESE HOURS?</div><div class="hn-body">Late nights are when DoorDash surges, the dining hall is closed, and you're hungry mid-problem-set. That's the exact window we're built for.</div></div>
       </div>
     </div>
   </div>
 </section>
-
-<!-- AMBASSADOR -->
 <section id="ambassador" class="section amb-section">
   <div class="section-inner">
-    <div class="reveal">
-      <div class="s-eyebrow">Ambassador Program</div>
-      <h2 class="s-h2">Earn on your schedule.</h2>
-      <p class="s-p">Deliver when you want, keep most of the fee, get a discount on your own orders. No boss, no shifts.</p>
-    </div>
+    <div class="reveal"><div class="s-eyebrow">AMBASSADOR PROGRAM</div><h2 class="s-h2">EARN ON YOUR SCHEDULE.</h2><p class="s-p">Deliver when you want, keep most of the fee, get a discount on your own orders. No boss, no shifts.</p></div>
     <div class="amb-layout">
       <div class="reveal">
         <div class="perk-list">
-          <div class="perk">
-            <div class="perk-num">01</div>
-            <div>
-              <div class="perk-title">Keep $3.75 per delivery</div>
-              <div class="perk-desc">We take a $1.00 platform fee. You keep the rest. Group orders pay $5.25. Do 12–15 deliveries a week and you're clearing $50–60 without a fixed schedule.</div>
-            </div>
-          </div>
-          <div class="perk">
-            <div class="perk-num">02</div>
-            <div>
-              <div class="perk-title">Total schedule freedom</div>
-              <div class="perk-desc">Orders come into a shared queue. Claim what you want, pass on what you don't. No minimums or obligations — built around class and everything else you have going on.</div>
-            </div>
-          </div>
-          <div class="perk">
-            <div class="perk-num">03</div>
-            <div>
-              <div class="perk-title">15% off your own orders</div>
-              <div class="perk-desc">Active ambassadors completing 5+ deliveries per week get a personal promo code — 15% off the service fee on personal orders. Higher tiers unlock bigger discounts.</div>
-            </div>
-          </div>
-          <div class="perk">
-            <div class="perk-num">04</div>
-            <div>
-              <div class="perk-title">All tips go straight to you</div>
-              <div class="perk-desc">We don't touch tips. Whatever a customer sends via Venmo is yours, 100%. No deduction, ever.</div>
-            </div>
-          </div>
+          <div class="perk"><div class="perk-left-bar"></div><div class="perk-num">01</div><div><div class="perk-title">KEEP $3.75 PER DELIVERY</div><div class="perk-desc">We take a $1.00 platform fee. You keep the rest. Group orders pay $5.25. 12–15 deliveries a week puts you at $50–60 without a fixed schedule.</div></div></div>
+          <div class="perk"><div class="perk-left-bar"></div><div class="perk-num">02</div><div><div class="perk-title">TOTAL SCHEDULE FREEDOM</div><div class="perk-desc">Orders come into a shared queue. Claim what you want, pass on what you don't. No minimums or obligations — built around class and everything else.</div></div></div>
+          <div class="perk"><div class="perk-left-bar"></div><div class="perk-num">03</div><div><div class="perk-title">15% OFF YOUR OWN ORDERS</div><div class="perk-desc">Active ambassadors completing 5+ deliveries per week get a personal promo code — 15% off the service fee. Higher tiers unlock bigger discounts.</div></div></div>
+          <div class="perk"><div class="perk-left-bar"></div><div class="perk-num">04</div><div><div class="perk-title">ALL TIPS GO STRAIGHT TO YOU</div><div class="perk-desc">We don't touch tips. Whatever a customer sends via Venmo is yours, 100%. No deduction. Ever.</div></div></div>
         </div>
-        <a href="mailto:rguzm@unc.edu?subject=Ambassador%20Application" class="apply-btn">Apply to Be an Ambassador →</a>
+        <a href="mailto:rguzm@unc.edu?subject=Ambassador%20Application" class="apply-btn">APPLY TO BE AN AMBASSADOR →</a>
       </div>
-
       <div class="earn-card reveal d1">
-        <div class="ec-head">
-          <div class="ec-head-title">Estimated Weekly Earnings</div>
-          <div class="ec-head-sub">Based on 4 nights/week, bike delivery</div>
-        </div>
+        <div class="ec-head"><div class="ec-head-title">ESTIMATED WEEKLY EARNINGS</div><div class="ec-head-sub">Based on 4 nights/week · bike delivery</div></div>
         <div class="ec-row"><span class="ec-label">Deliveries per night</span><span class="ec-val">3</span></div>
         <div class="ec-row"><span class="ec-label">Nights active per week</span><span class="ec-val">4</span></div>
         <div class="ec-row"><span class="ec-label">Your cut per delivery</span><span class="ec-val">$3.75</span></div>
         <div class="ec-row"><span class="ec-label">Estimated tips</span><span class="ec-val">~$1.00 / order</span></div>
-        <div class="ec-row"><span class="ec-label">Delivery earnings</span><span class="ec-val g">$45 / week</span></div>
-        <div class="ec-row"><span class="ec-label">Tip earnings</span><span class="ec-val g">$12 / week</span></div>
-        <div class="ec-total">
-          <div class="ec-total-label">Gross Weekly</div>
-          <div class="ec-total-num">$57</div>
-          <div class="ec-total-sub">~$14/hr — beats dining hall wages</div>
-        </div>
+        <div class="ec-row"><span class="ec-label">Delivery earnings</span><span class="ec-val green">$45 / WEEK</span></div>
+        <div class="ec-row"><span class="ec-label">Tip earnings</span><span class="ec-val green">$12 / WEEK</span></div>
+        <div class="ec-total"><div class="ec-total-label">GROSS WEEKLY</div><div class="ec-total-num">$57</div><div class="ec-total-sub">~$14/HR · BEATS DINING HALL WAGES</div></div>
         <div class="ec-note">Estimates only. Actual earnings vary. Ambassadors are independent contractors responsible for their own tax reporting.</div>
       </div>
     </div>
   </div>
 </section>
-
-<!-- RISKS -->
 <section id="risks" class="section risks-section">
   <div class="section-inner">
-    <div class="reveal">
-      <div class="s-eyebrow">Transparency</div>
-      <h2 class="s-h2">What you should know</h2>
-      <p class="s-p">We're student-run. Here's an honest look at risks and how we handle them.</p>
-    </div>
+    <div class="reveal"><div class="s-eyebrow">TRANSPARENCY</div><h2 class="s-h2">WHAT YOU SHOULD KNOW</h2><p class="s-p">We're student-run. Here's an honest breakdown of risks and how we handle them.</p></div>
     <div class="risk-grid">
-      <div class="risk reveal">
-        <span class="risk-badge rb-low">Low Risk</span>
-        <div class="risk-title">Food Safety</div>
-        <div class="risk-desc">Pronto is a courier only. We transport sealed, restaurant-prepared food. We never prepare, store, or alter food.</div>
-        <div class="risk-mit">Legally exempts us from NC food service licensing. All food travels in insulated bags, sealed at the restaurant.</div>
-      </div>
-      <div class="risk reveal d1">
-        <span class="risk-badge rb-med">Medium Risk</span>
-        <div class="risk-title">UNC Campus Policy</div>
-        <div class="risk-desc">The university restricts commercial activity on campus grounds. Visibility could prompt attention from administration.</div>
-        <div class="risk-mit">We deliver to building entrances only — not inside dorms. We don't solicit on university property.</div>
-      </div>
-      <div class="risk reveal d2">
-        <span class="risk-badge rb-low">Low Risk</span>
-        <div class="risk-title">Worker Classification</div>
-        <div class="risk-desc">Ambassadors are independent contractors who set their own hours, use their own equipment, and can decline any order.</div>
-        <div class="risk-mit">Ambassadors earning over $600/year receive a 1099. We don't control schedules — a key legal distinction.</div>
-      </div>
-      <div class="risk reveal">
-        <span class="risk-badge rb-low">Low Risk</span>
-        <div class="risk-title">Payment Disputes</div>
-        <div class="risk-desc">Venmo payments are typically final. Restaurant errors aren't our fault, but we'll always advocate on your behalf.</div>
-        <div class="risk-mit">Every order confirmed via text before placing. Photo of receipt available on request. Our mistakes are always made right.</div>
-      </div>
-      <div class="risk reveal d1">
-        <span class="risk-badge rb-med">Medium Risk</span>
-        <div class="risk-title">Capacity & Weather</div>
-        <div class="risk-desc">We're a small team. High-demand nights may hit capacity before close. Severe weather may pause service.</div>
-        <div class="risk-mit">Real-time updates on Instagram. No charge if we can't fulfill. Closures posted by 8:30PM on affected nights.</div>
-      </div>
-      <div class="risk reveal d2">
-        <span class="risk-badge rb-low">Low Risk</span>
-        <div class="risk-title">Business & Taxes</div>
-        <div class="risk-desc">Pronto operates as a legitimate NC courier business. All income reported. No food license required for couriers in NC.</div>
-        <div class="risk-mit">NC LLC filing is $125 online. Business registration in progress. Ambassadors handle their own tax reporting.</div>
-      </div>
+      <div class="risk reveal"><div class="risk-top-bar rb-low"></div><span class="risk-badge badge-low">LOW RISK</span><div class="risk-title">FOOD SAFETY</div><div class="risk-desc">Pronto is a courier only. We transport sealed, restaurant-prepared food. We never prepare, store, or alter food at any point.</div><div class="risk-mit">Legally exempts us from NC food service licensing. All food travels in insulated bags, sealed at the restaurant.</div></div>
+      <div class="risk reveal d1"><div class="risk-top-bar rb-med"></div><span class="risk-badge badge-med">MEDIUM RISK</span><div class="risk-title">UNC CAMPUS POLICY</div><div class="risk-desc">The university restricts commercial activity on campus grounds. Increased visibility could prompt attention from administration.</div><div class="risk-mit">We deliver to building entrances only. We don't solicit on university property.</div></div>
+      <div class="risk reveal d2"><div class="risk-top-bar rb-low"></div><span class="risk-badge badge-low">LOW RISK</span><div class="risk-title">WORKER CLASSIFICATION</div><div class="risk-desc">Ambassadors are independent contractors who set their own hours, use their own equipment, and can decline any order.</div><div class="risk-mit">Ambassadors earning over $600/year receive a 1099. We don't control schedules — a key legal distinction.</div></div>
+      <div class="risk reveal"><div class="risk-top-bar rb-low"></div><span class="risk-badge badge-low">LOW RISK</span><div class="risk-title">PAYMENT DISPUTES</div><div class="risk-desc">Venmo payments are typically final. Restaurant errors aren't our fault, but we'll always advocate on your behalf.</div><div class="risk-mit">Every order confirmed via text before placing. Photo of receipt available on request. Our mistakes are always made right.</div></div>
+      <div class="risk reveal d1"><div class="risk-top-bar rb-med"></div><span class="risk-badge badge-med">MEDIUM RISK</span><div class="risk-title">CAPACITY & WEATHER</div><div class="risk-desc">We're a small team. High-demand nights may hit capacity before close. Severe weather may pause service.</div><div class="risk-mit">Real-time updates on Instagram. No charge if we can't fulfill. Closures posted by 8:30PM on affected nights.</div></div>
+      <div class="risk reveal d2"><div class="risk-top-bar rb-low"></div><span class="risk-badge badge-low">LOW RISK</span><div class="risk-title">BUSINESS & TAXES</div><div class="risk-desc">Pronto operates as a legitimate NC courier business. All income reported. No food license required for couriers in NC.</div><div class="risk-mit">NC LLC filing is $125 online. Business registration in progress. Ambassadors handle their own tax reporting.</div></div>
     </div>
   </div>
 </section>
-
-<!-- ORDER -->
 <section id="order" class="section order-section">
   <div class="section-inner">
-    <div class="reveal">
-      <div class="s-eyebrow">Place an Order</div>
-      <h2 class="s-h2">Let's eat.</h2>
-      <p class="s-p">Fill this out and expect a text confirmation within 5 minutes. Payment via Venmo at delivery.</p>
-    </div>
+    <div class="reveal"><div class="s-eyebrow">PLACE AN ORDER</div><h2 class="s-h2">LET'S EAT.</h2><p class="s-p">Fill this out and expect a text confirmation within 5 minutes. Payment via Venmo at delivery.</p></div>
     <div class="order-layout">
-      <div class="form-wrap reveal">
+      <div class="form-card reveal">
         <form action="https://formspree.io/f/YOUR_CODE" method="POST">
           <input type="hidden" name="_subject" value="New Pronto Order">
           <div class="form-row2">
-            <div class="fg">
-              <label class="fl">Name</label>
-              <input type="text" name="name" class="fi" placeholder="First name" required>
-            </div>
-            <div class="fg">
-              <label class="fl">Phone Number</label>
-              <input type="tel" name="phone" class="fi" placeholder="(516) 000-0000" required>
-            </div>
+            <div class="fg"><label class="fl">Name</label><input type="text" name="name" class="fi" placeholder="First name" required></div>
+            <div class="fg"><label class="fl">Phone Number</label><input type="tel" name="phone" class="fi" placeholder="(516) 000-0000" required></div>
           </div>
           <div class="form-row2">
-            <div class="fg">
-              <label class="fl">Drop-off Location</label>
-              <select name="location" class="fs" required>
-                <option value="" disabled selected>Select dorm</option>
-                <optgroup label="Zone A — included">
-                  <option>Morrison Residence Hall</option>
-                  <option>Craige Residence Hall</option>
-                  <option>Hinton James</option>
-                  <option>Rams Head Residence Hall</option>
-                  <option>Ehringhaus</option>
-                  <option>Parker Hall</option>
-                </optgroup>
-                <optgroup label="Zone B — +$1.50">
-                  <option>Granville Towers</option>
-                  <option>Carmichael</option>
-                  <option>Cobb Hall</option>
-                  <option>Avery Hall</option>
-                </optgroup>
-                <optgroup label="Other">
-                  <option>Off-campus (add address in notes)</option>
-                </optgroup>
-              </select>
-            </div>
-            <div class="fg">
-              <label class="fl">Order Type</label>
-              <select name="order_type" class="fs" required>
-                <option value="" disabled selected>Select type</option>
-                <option>Solo — $4.99 delivery</option>
-                <option>Group — $6.99 flat (3+ people)</option>
-                <option>Late Night — $5.99 (Fri/Sat after 12AM)</option>
-              </select>
-            </div>
+            <div class="fg"><label class="fl">Drop-off Location</label><select name="location" class="fs" required><option value="" disabled selected>Select dorm</option><optgroup label="Zone A — included"><option>Morrison Residence Hall</option><option>Craige Residence Hall</option><option>Hinton James</option><option>Rams Head Residence Hall</option><option>Ehringhaus</option><option>Parker Hall</option></optgroup><optgroup label="Zone B — +$1.50"><option>Granville Towers</option><option>Carmichael</option><option>Cobb Hall</option><option>Avery Hall</option></optgroup><optgroup label="Other"><option>Off-campus (add address in notes)</option></optgroup></select></div>
+            <div class="fg"><label class="fl">Order Type</label><select name="order_type" class="fs" required><option value="" disabled selected>Select type</option><option>Solo — $4.99 delivery</option><option>Group — $6.99 flat (3+ people)</option><option>Late Night — $5.99 (Fri/Sat after 12AM)</option></select></div>
           </div>
-          <div class="fg">
-            <label class="fl">Restaurant + Order</label>
-            <textarea name="order_details" class="fta" placeholder="Restaurant name, then each item with any customizations. For group orders, label each person's items separately." required></textarea>
-            <div class="fhint">Check the menu online first — exact item names help us get it right.</div>
-          </div>
+          <div class="fg"><label class="fl">Restaurant + Order</label><textarea name="order_details" class="fta" placeholder="Restaurant name, then each item with any customizations. For group orders, label each person's items separately." required></textarea><div class="fhint">Check the menu online first — exact item names help us get it right.</div></div>
           <div class="form-row2">
-            <div class="fg">
-              <label class="fl">Venmo Handle</label>
-              <input type="text" name="venmo" class="fi" placeholder="@yourvenmo" required>
-              <div class="fhint">You'll be charged: food total + fees.</div>
-            </div>
-            <div class="fg">
-              <label class="fl">Special Instructions</label>
-              <input type="text" name="notes" class="fi" placeholder="Allergies, extra sauce, gate code…">
-            </div>
+            <div class="fg"><label class="fl">Venmo Handle</label><input type="text" name="venmo" class="fi" placeholder="@yourvenmo" required><div class="fhint">Charged at drop-off: food total + fees.</div></div>
+            <div class="fg"><label class="fl">Special Instructions</label><input type="text" name="notes" class="fi" placeholder="Allergies, extra sauce, gate code…"></div>
           </div>
-          <button type="submit" class="sub-btn">Submit Order Request</button>
+          <button type="submit" class="sub-btn">SUBMIT ORDER REQUEST</button>
         </form>
       </div>
-
       <div class="order-side reveal d1">
-        <div class="sc blue-tint">
-          <div class="sc-title">Current Status</div>
-          <div class="sc-body" id="sideStatus">Checking hours…</div>
-        </div>
-        <div class="sc">
-          <div class="sc-title">Payment</div>
-          <div class="sc-body">
-            All payments via Venmo. You'll get a total before we place your order.<br>
-            <span class="venmo-tag">@ryanguzman1</span>
-          </div>
-        </div>
-        <div class="sc">
-          <div class="sc-title">Order Tracking</div>
-          <div class="sc-body">We text at three points: order confirmed, food picked up, and when we're at your building. Save the number after your first confirmation.</div>
-        </div>
-        <div class="sc">
-          <div class="sc-title">Cancellations</div>
-          <div class="sc-body">Cancel within 5 minutes at no charge. Once we've placed the restaurant order, the food cost may apply. Text us — we're flexible.</div>
-        </div>
-        <div class="sc">
-          <div class="sc-title">Contact</div>
-          <div class="sc-body">
-            <strong>Text/call:</strong> (516) 320-1570<br>
-            <strong>Instagram:</strong> <a href="https://instagram.com/ryanguzman._" target="_blank">@ryanguzman._</a><br>
-            <strong>Email:</strong> <a href="mailto:rguzm@unc.edu">rguzm@unc.edu</a>
-          </div>
-        </div>
-        <div class="sc">
-          <div class="sc-title">Liability Note</div>
-          <div class="sc-body" style="font-size:0.76rem;">Pronto is a courier service only. Food is prepared entirely by the listed restaurant. By submitting an order you acknowledge this.</div>
-        </div>
+        <div class="sc red-tint"><div class="sc-title">CURRENT STATUS</div><div class="sc-body" id="sideStatus">Checking hours…</div></div>
+        <div class="sc"><div class="sc-title">PAYMENT</div><div class="sc-body">All payments via Venmo. You'll get a total before we place your order.<br><span class="venmo-chip">@RYANGUZMAN1</span></div></div>
+        <div class="sc"><div class="sc-title">ORDER TRACKING</div><div class="sc-body">We text at three points: order confirmed, food picked up, and when we're at your building. Save the number after your first order.</div></div>
+        <div class="sc"><div class="sc-title">CANCELLATIONS</div><div class="sc-body">Cancel within 5 minutes at no charge. Once we've placed the restaurant order, the food cost may apply. Text us — we're flexible.</div></div>
+        <div class="sc"><div class="sc-title">CONTACT</div><div class="sc-body"><strong>Text/call:</strong> (516) 320-1570<br><strong>Instagram:</strong> <a href="https://instagram.com/ryanguzman._" target="_blank">@ryanguzman._</a><br><strong>Email:</strong> <a href="mailto:rguzm@unc.edu">rguzm@unc.edu</a></div></div>
       </div>
     </div>
   </div>
 </section>
-
-<!-- FOOTER -->
 <footer>
   <div class="foot-inner">
-    <div>
-      <div class="foot-logo">Pronto</div>
-      <div class="foot-tag">Campus delivery for Tar Heels. No markup, no surge, no nonsense.</div>
-    </div>
-    <div>
-      <div class="foot-col-label">Navigate</div>
-      <ul class="foot-links">
-        <li><a href="#how">How It Works</a></li>
-        <li><a href="#pricing">Pricing</a></li>
-        <li><a href="#hours">Hours</a></li>
-        <li><a href="#ambassador">Ambassador Program</a></li>
-        <li><a href="#risks">Transparency</a></li>
-      </ul>
-    </div>
-    <div>
-      <div class="foot-col-label">Contact</div>
-      <ul class="foot-links">
-        <li><a href="mailto:rguzm@unc.edu">rguzm@unc.edu</a></li>
-        <li><a href="https://instagram.com/ryanguzman._" target="_blank">@ryanguzman._</a></li>
-        <li><a href="tel:5163201570">(516) 320-1570</a></li>
-        <li><a href="#order">Place an Order</a></li>
-      </ul>
-    </div>
-    <div>
-      <div class="foot-col-label">Program</div>
-      <ul class="foot-links">
-        <li><a href="mailto:rguzm@unc.edu?subject=Ambassador Application">Become an Ambassador</a></li>
-        <li><a href="#pricing">Compare vs DoorDash</a></li>
-        <li><a href="#risks">Transparency</a></li>
-      </ul>
-    </div>
+    <div><div class="foot-logo">PRONTO<span>.</span></div><div class="foot-tag">Campus delivery for Tar Heels. No markup, no surge, no nonsense.</div></div>
+    <div><div class="foot-col-label">NAVIGATE</div><ul class="foot-links"><li><a href="#how">How It Works</a></li><li><a href="#pricing">Pricing</a></li><li><a href="#hours">Hours</a></li><li><a href="#ambassador">Ambassador Program</a></li><li><a href="#risks">Transparency</a></li></ul></div>
+    <div><div class="foot-col-label">CONTACT</div><ul class="foot-links"><li><a href="mailto:rguzm@unc.edu">rguzm@unc.edu</a></li><li><a href="https://instagram.com/ryanguzman._" target="_blank">@ryanguzman._</a></li><li><a href="tel:5163201570">(516) 320-1570</a></li><li><a href="#order">Place an Order</a></li></ul></div>
+    <div><div class="foot-col-label">PROGRAM</div><ul class="foot-links"><li><a href="mailto:rguzm@unc.edu?subject=Ambassador Application">Become an Ambassador</a></li><li><a href="#pricing">Compare vs DoorDash</a></li><li><a href="#risks">Transparency</a></li></ul></div>
   </div>
   <div class="foot-bottom">
     <div class="foot-disclaimer">Pronto is an independent courier service and is not affiliated with, endorsed by, or sponsored by the University of North Carolina at Chapel Hill, DoorDash, Uber Eats, or any restaurant. Pronto does not prepare, store, or alter food. All food is ordered from and prepared by licensed third-party restaurants. Ambassadors are independent contractors. Earnings estimates are illustrative and not guaranteed.</div>
-    <div class="foot-copy">© 2025 Pronto</div>
+    <div class="foot-copy">© 2025 PRONTO</div>
   </div>
 </footer>
-
-<div id="toast">Order submitted — you'll get a text within 5 minutes.</div>
-
+<div id="toast">ORDER SUBMITTED — TEXT INCOMING WITHIN 5 MINUTES.</div>
 <script>
-function getStatus() {
-  const now = new Date();
-  const day = now.getDay(), h = now.getHours(), t = h + now.getMinutes()/60;
-  let open = false;
-  if ((day===2||day===3) && t>=21 && t<24) open=true;
-  if (day===4 && t>=21) open=true;
-  if (day===5 && h<1) open=true;
-  if ((day===5||day===6) && t>=21) open=true;
-  if ((day===0||day===6) && h<2) open=true;
+function getStatus(){
+  const now=new Date(),day=now.getDay(),h=now.getHours(),t=h+now.getMinutes()/60;
+  let open=false;
+  if((day===2||day===3)&&t>=21&&t<24)open=true;
+  if(day===4&&t>=21)open=true;
+  if(day===5&&h<1)open=true;
+  if((day===5||day===6)&&t>=21)open=true;
+  if((day===0||day===6)&&h<2)open=true;
   const days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
   const openDays=[2,3,4,5,6];
   let next='';
   if(!open){for(let i=1;i<=7;i++){const d=(day+i)%7;if(openDays.includes(d)){next=days[d];break;}}}
-  return {open,next};
+  return{open,next};
 }
-
 function updateStatus(){
-  const {open,next}=getStatus();
+  const{open,next}=getStatus();
   const dot=document.getElementById('statusDot');
   const txt=document.getElementById('statusText');
   const card=document.getElementById('statusCard');
   const side=document.getElementById('sideStatus');
   if(open){
-    dot.className='sdot open';
-    txt.textContent='Open now';
-    const m='<strong style="color:var(--green)">Open now.</strong> Submit your order and expect a text within 5 minutes.';
-    if(card) card.innerHTML=m;
-    if(side) side.innerHTML=m;
-  } else {
-    dot.className='sdot closed';
-    txt.textContent='Closed · Opens '+next;
-    const m='<strong style="color:var(--red)">Currently closed.</strong> We open '+next+' at 9PM. Tue–Wed 9PM–12AM · Thu 9PM–1AM · Fri–Sat 9PM–2AM.';
-    if(card) card.innerHTML=m;
-    if(side) side.innerHTML=m;
+    dot.className='sdot open';txt.textContent='OPEN NOW';
+    const m='<strong style="color:#00E676">OPEN NOW.</strong> Submit your order and expect a text within 5 minutes.';
+    if(card)card.innerHTML=m;if(side)side.innerHTML=m;
+  }else{
+    dot.className='sdot closed';txt.textContent='CLOSED · OPENS '+next.toUpperCase();
+    const m='<strong style="color:#E8002D">CURRENTLY CLOSED.</strong> We open '+next.toUpperCase()+' at 9PM. TUE–WED 9PM–12AM · THU 9PM–1AM · FRI–SAT 9PM–2AM.';
+    if(card)card.innerHTML=m;if(side)side.innerHTML=m;
   }
 }
-updateStatus();
-setInterval(updateStatus,30000);
-
+updateStatus();setInterval(updateStatus,30000);
+document.querySelector('form').addEventListener('submit',function(e){
+  if(this.action.includes('YOUR_CODE')){
+    e.preventDefault();
+    const t=document.getElementById('toast');
+    t.classList.add('show');
+    setTimeout(()=>t.classList.remove('show'),4500);
+    this.reset();
+  }
+});
 const obs=new IntersectionObserver(entries=>{
   entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});
-},{threshold:0.07});
+},{threshold:0.06});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
-
 document.querySelectorAll('a[href^="#"]').forEach(a=>{
   a.addEventListener('click',e=>{
     const t=document.querySelector(a.getAttribute('href'));
